@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 19:34:43 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/21 14:33:29 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:35:11 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct		s_point
 	int				y;
 	int				truex;
 	int				truey;
-	int				colorchange1;
-	int				colorchange2;
 	struct s_point	*next;
 	struct s_point	*prev;
 }					t_point;
@@ -64,6 +62,8 @@ typedef struct		s_map
 	int				bpp;
 	int				size_line;
 	int				endian;
+	int				merge_x;
+	int				merge_y;
 }					t_map;
 
 typedef struct		s_brese_para

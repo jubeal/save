@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:54:58 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/21 16:18:47 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:47:56 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ static void	pixel_put_img(int x, int y, t_map *map, int color)
 static void	bresenham_draw2(t_point *from, t_point *to, t_map *map,
 		t_brese_para *param)
 {
-	float	cumul;
+	float		cumul;
 	int		x;
 	int		y;
 
 	x = from->truex;
 	y = from->truey;
-	cumul = 0;
+	cumul = param->dy;
 	while (y != to->truey)
 	{
 		y += param->yinc;
-		cumul += param->dy / param->dx;
-		if (cumul >= 5)
+		cumul -= param->dx * 2;
+		if (cumul <= 0)
 		{
-			cumul -= -1.0;
+			cumul += param->dy * 2;
 			x += param->xinc;
 		}
 		if (x >= 0 && y >= 0 && x < WIN_X && y < WIN_Y)
@@ -51,7 +51,7 @@ static void	bresenham_draw2(t_point *from, t_point *to, t_map *map,
 static void	bresenham_draw(t_point *from, t_point *to, t_map *map,
 		t_brese_para *param)
 {
-	float	cumul;
+	float		cumul;
 	int		x;
 	int		y;
 
@@ -61,14 +61,14 @@ static void	bresenham_draw(t_point *from, t_point *to, t_map *map,
 		pixel_put_img(x, y, map, color_set(to, from, map, x));
 	if (param->dx > param->dy)
 	{
-		cumul = 0.0;
+		cumul = param->dx;
 		while (x != to->truex)
 		{
 			x += param->xinc;
-			cumul += param->dx / param->dy;
-			if (cumul >= 5)
+			cumul -= param->dy * 2 ;
+			if (cumul <= 0)
 			{
-				cumul += -1.0;
+				cumul += param->dx * 2;
 				y += param->yinc;
 			}
 			if (x >= 0 && y>= 0 && (x < WIN_X && y < WIN_Y))

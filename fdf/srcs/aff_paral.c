@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:29:48 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/19 16:23:46 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:35:14 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	draw_paral(t_map *map)
 	{
 		x = tmp->x * map->zoomx;
 		y = tmp->y * map->zoomy;
-		tmp->truex = x + (WIN_X / 3.5);
-		tmp->truey = (y - tmp->z * map->zoomz) + (WIN_Y / 4);
-		tmp->colorchange1 = (y - ((tmp->z * map->zoomz) * 0.3)) + (WIN_Y / 10);
-		tmp->colorchange2 = (y - ((tmp->z * map->zoomz) * 0.6)) + (WIN_Y / 10);
+		tmp->truex = x + map->merge_x;;
+		tmp->truey = (y - tmp->z * map->zoomz) + map->merge_y;
 		tmp = tmp->next;
 	}
 	map->affichage = 1;
@@ -35,7 +33,7 @@ void	draw_paral(t_map *map)
 
 void	change_aff(t_map *map)
 {
-	mlx_clear_window(map->ptr, map->win);
+	ft_bzero(map->data, WIN_X * WIN_Y * 4);
 	if (map->affichage == 0)
 		draw_paral(map);
 	else

@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 15:12:33 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/21 14:33:19 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:03:19 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		init_t_map(t_map **map)
 	(*map)->bpp = 0;
 	(*map)->size_line = 0;
 	(*map)->endian = 0;
+	(*map)->merge_x = WIN_X / 2.7;
+	(*map)->merge_y = WIN_Y / 10;
 	return (1);
 }
 

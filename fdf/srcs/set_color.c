@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:10:02 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/21 13:33:40 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/21 18:03:42 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static int	color_degraded(int color_from, int color_to, int place, int max)
 	i = 0;
 	while (++i < place)
 	{
-		R += (((color_to & 0xFF0000) >> 16) - ((color_from & 0xFF0000) >> 16)) / max;
-		G += (((color_to & 0x00FF00) >> 8) - ((color_from & 0x00FF00) >> 8)) / max;
-		B += ((color_to & 0x0000FF) - (color_from & 0x0000FF)) / max;
+		R += ((color_from >> 16 & 0xFF) - (color_from >> 16 & 0xFF)) / max;
+		G += ((color_to >> 8 & 0xFF) - (color_from >> 8 & 0xFF)) / max;
+		B += ((color_to & 0xFF) - (color_from & 0xFF)) / max;
 	}
 	R = R << 16;
 	G = G << 8;
