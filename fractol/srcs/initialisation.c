@@ -6,13 +6,13 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 15:23:43 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/07 16:43:05 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/08 16:28:06 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_fract(t_fract **first)
+int		init_fract(t_fract **first)
 {
 	t_fract	*tmp;
 
@@ -21,6 +21,7 @@ void	init_fract(t_fract **first)
 	{
 		if (!(tmp = (t_fract *)malloc(sizeof(t_fract))))
 			return (0);
+		*first = tmp;
 	}
 	else
 	{
@@ -37,6 +38,7 @@ void	init_fract(t_fract **first)
 	tmp->img = NULL;
 	tmp->data = NULL;
 	tmp->next = NULL;
+	return (1);
 }
 
 void	open_windows(t_fract *first)
@@ -52,20 +54,20 @@ void	open_windows(t_fract *first)
 	win = mlx_new_window(ptr, WIN_X, WIN_Y, "fractol");
 	first->ptr = ptr;
 	first->win = win;
-	if (!(map->img = mlx_new_image(ptr, WIN_X, WIN_Y)))
+	if (!(first->img = mlx_new_image(ptr, WIN_X, WIN_Y)))
 	{
 		ft_putstr("manque de place pour new_image\n");
 		exit(0);
 	}
-	if (!(map->data = mlx_get_data_addr(map->img, &map->bpp, &map->size_line,
-					&map->endian)))
+	if (!(first->data = mlx_get_data_addr(first->img, &first->bpp,
+					&first->size_line, &first->endian)))
 	{
 		ft_putstr("manque de place pour data_addr\n");
 		exit(0);
 	}
 }
 
-void	pixel_put_img(int x, int y, t_fract curent, int color)
+void	pixel_put_img(int x, int y, t_fract *curent, int color)
 {
 	int		pixel;
 
@@ -75,4 +77,27 @@ void	pixel_put_img(int x, int y, t_fract curent, int color)
 	curent->data[pixel] = color & 0xFF;
 	curent->data[pixel + 1] = color >> 8 & 0xFF;
 	curent->data[pixel + 2] = color >> 16 & 0xFF;
+}
+
+//int		set_color(
+
+void	init_maths(t_maths **tools)
+{
+	if (!(*tools = (t_maths *)malloc(sizeof(t_maths))))
+	{
+		ft_putstr("manque de place pour t_maths\n");
+		exit(0);
+	}
+	(*tools)->iter_max = 50;
+	(*tools)->cr = 0;
+	(*tools)->ci = 0;
+	(*tools)->zr = 0;
+	(*tools)->zi = 0;
+	(*tools)->i = 0;
+	(*tools)->zoomx = 0;
+	(*tools)->zoomy = 0;
+	(*tools)->x1 = -2.1;
+	(*tools)->x2 = 0.6;
+	(*tools)->y1 = -1.2;
+	(*tools)->y2 = 1.2;
 }

@@ -6,7 +6,7 @@
 #    By: jubeal <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 10:38:34 by jubeal            #+#    #+#              #
-#    Updated: 2019/01/07 14:16:00 by jubeal           ###   ########.fr        #
+#    Updated: 2019/01/08 15:25:42 by jubeal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ CPPFLAGS = -I./includes/
 #Name
 
 SRC_NAME =	main.c \
+			Mandelbrot.c \
+			initialisation.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

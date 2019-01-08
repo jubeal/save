@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/07 16:30:30 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/08 16:25:44 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 static int		deal_key(int key, t_fract *first)
 {
-	if (key == ESC_KEY)
+	(void)first;
+	if (key == 53)
 		exit(0);
+	return (1);
 }
 
-int				error(int n)
+void			error(int n)
 {
 	if (n == 1)
-		ft_putstr("usage: ./fdf fractol_type\n");
+		ft_putstr("usage: ./fractol fractol_type\n");
 	if (n == 2)
 		ft_putstr("error\n");
-	return (1);
+	if (n == 3)
+		ft_putstr("error: unknown fractol_type. Enter ./fractol ?\n");
+	exit(0);
 }
 
 static void		fractol_choice(t_fract *first, char **av)
@@ -36,12 +40,14 @@ static void		fractol_choice(t_fract *first, char **av)
 	tmp = first;
 	while (tmp)
 	{
-		if (ft_strcmp("Mandelbrot", av[i]))
+		if (!ft_strcmp("Mandelbrot", av[i]))
 			first->type = 1;
-		else if (ft_strcmp("Julia", av[i]))
+		else if (!ft_strcmp("Julia", av[i]))
 			first->type = 2;
-		else if (ft_strcmp("Autre", av[i]))
+		else if (!ft_strcmp("Autre", av[i]))
 			first->type = 3;
+		else
+			error(2);
 		i++;
 		tmp = tmp->next;
 	}
@@ -57,10 +63,10 @@ static void		fractol(t_fract *first)
 		open_windows(first);
 		if (first->type == 1)
 			Mandelbrot(first);
-		else if (first->type == 2)
+		/*else if (first->type == 2)
 			Julia(first);
 		else
-			autre(first);
+			autre(first);*/
 		tmp = tmp->next;
 	}
 }
@@ -70,14 +76,12 @@ int				main(int ac, char **av)
 	t_fract	*first;
 
 	if (ac == 0)
-		return (error(1));
+		error(1);
 	if (!init_fract(&first))
-		return (error(2));
-	if (!init_fract(&first))
-		return (error(2));
+		error(2);
 	fractol_choice(first, av);
 	fractol(first);
-	mlx_hook(win, 2, (1L << 1), deal_key, first);
+	mlx_hook(first->win, 2, (1L << 1), deal_key, first);
 	mlx_loop(first->ptr);
 	return (0);
 }

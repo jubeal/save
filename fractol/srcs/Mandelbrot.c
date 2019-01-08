@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 15:13:05 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/07 16:55:38 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/08 17:34:58 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,39 @@
 
 void	Mandelbrot(t_fract *first)
 {
-	int		iter;
-	int		zr;
-	int		zi;
-	int		i;
+	t_maths	*tools;
+	int		tmp;
 
-	iter = 50;
-	z = 0;
-	i = 0;
+	tools = NULL;
+	init_maths(&tools);
+	tools->zoomx = WIN_X / (tools->x2 - tools->x1);
+	tools->zoomy = WIN_Y / (tools->y2 - tools->y1);
 	while (first->y < WIN_Y)
 	{
 		while (first->x < WIN_X)
 		{
-			while (
-			first->x ++;
+			tools->cr = (long double)first->x / tools->zoomx + tools->x1;
+			tools->ci = (long double)first->y / tools->zoomy + tools->y1;
+			tools->zr = 0;
+			tools->zi = 0;
+			tools->i = 0;
+			while (tools->zr * tools->zr + tools->zi * tools->zi < 4
+					&& tools->i < tools->iter_max)
+			{
+				tmp = tools->zr;
+				tools->zr = tools->zr * tools->zr - tools->zi * tools->zi
+					+ tools->cr;
+				tools->zi = 2 * tools->zi * tmp + tools->ci;
+				tools->i++;
+			}
+			if (tools->i == tools->iter_max)
+			{
+				pixel_put_img(first->x, first->y, first, 0xFFFFFF);
+			}
+			first->x++;
 		}
+		first->x = 0;
 		first->y++;
 	}
+	mlx_put_image_to_window(first->ptr, first->win, first->img, 0, 0);
 }
