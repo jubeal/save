@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 15:23:43 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/08 16:28:06 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:39:56 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int		init_fract(t_fract **first)
 			return (0);
 		tmp = tmp->next;
 	}
-	tmp->x = 0;
-	tmp->y = 0;
 	tmp->ptr = NULL;
 	tmp->win = NULL;
 	tmp->img = NULL;
 	tmp->data = NULL;
 	tmp->next = NULL;
+	tmp->tools = NULL;
+	tmp->color_value = 3;
+	tmp->r = 5;
+	tmp->g = 10;
+	tmp->b = 2;
 	return (1);
 }
 
@@ -79,7 +82,12 @@ void	pixel_put_img(int x, int y, t_fract *curent, int color)
 	curent->data[pixel + 2] = color >> 16 & 0xFF;
 }
 
-//int		set_color(
+int		set_color(t_maths *tools, t_fract *first)
+{
+	return (((255 - (tools->i * first->r) * first->color_value) << 16) +
+			((255 - (tools->i * first->g) * first->color_value) << 8) +
+			((tools->i * first->b) * first->color_value));
+}
 
 void	init_maths(t_maths **tools)
 {

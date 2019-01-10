@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/08 16:25:44 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:22:47 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static int		deal_key(int key, t_fract *first)
 	(void)first;
 	if (key == 53)
 		exit(0);
+	if (key >= 123 && key <= 126)
+		translate(first, key);
+	if (key == 69 || key == 78)
+		zoom(first, key);
 	return (1);
 }
 
@@ -47,13 +51,13 @@ static void		fractol_choice(t_fract *first, char **av)
 		else if (!ft_strcmp("Autre", av[i]))
 			first->type = 3;
 		else
-			error(2);
+			error(3);
 		i++;
 		tmp = tmp->next;
 	}
 }
 
-static void		fractol(t_fract *first)
+void			fractol(t_fract *first)
 {
 	t_fract	*tmp;
 

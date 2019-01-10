@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:17:58 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/08 16:48:49 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:40:04 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,27 @@
 # define WIN_X 540
 # define WIN_Y 480
 
+typedef struct		s_maths
+{
+	int				iter_max;
+	long double		cr;
+	long double		ci;
+	long double		zr;
+	long double		zi;
+	int				i;
+	long double		zoomx;
+	long double		zoomy;
+	long double		x1;
+	long double		x2;
+	long double		y1;
+	long double		y2;
+}					t_maths;
+
 typedef struct		s_fract
 {
 	int				type;
-	int				x;
-	int				y;
+	long double		x;
+	long double		y;
 	void			*ptr;
 	void			*win;
 	void			*img;
@@ -31,27 +47,20 @@ typedef struct		s_fract
 	int				size_line;
 	int				endian;
 	struct s_fract	*next;
+	int				color_value;
+	int				r;
+	int				g;
+	int				b;
+	t_maths			*tools;
 }					t_fract;
-
-typedef struct		s_maths
-{
-	int				iter_max;
-	long double		cr;
-	long double		ci;
-	float			zr;
-	float			zi;
-	int				i;
-	float			zoomx;
-	float			zoomy;
-	float			x1;
-	float			x2;
-	float			y1;
-	float			y2;
-}					t_maths;
 
 void				Mandelbrot(t_fract *first);
 int					init_fract(t_fract **first);
 void				open_windows(t_fract *first);
 void				init_maths(t_maths **tools);
 void				pixel_put_img(int x, int y, t_fract *curent, int color);
+int					set_color(t_maths *tools, t_fract *first);
+void				translate(t_fract *first, int key);
+void				fractol(t_fract *first);
+void				zoom(t_fract *first, int key);
 #endif
