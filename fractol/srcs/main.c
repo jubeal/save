@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/10 16:22:47 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:53:01 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void			fractol(t_fract *first)
 		open_windows(first);
 		if (first->type == 1)
 			Mandelbrot(first);
-		/*else if (first->type == 2)
+		else if (first->type == 2)
 			Julia(first);
-		else
+		/*else
 			autre(first);*/
 		tmp = tmp->next;
 	}

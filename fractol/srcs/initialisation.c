@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 15:23:43 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/10 16:39:56 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:51:20 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		init_fract(t_fract **first)
 			return (0);
 		tmp = tmp->next;
 	}
+	tmp->win_x = 540;
+	tmp->win_y = 480;
 	tmp->ptr = NULL;
 	tmp->win = NULL;
 	tmp->img = NULL;
@@ -54,10 +56,10 @@ void	open_windows(t_fract *first)
 		ft_putstr("manque de place pour mlx_init\n");
 		exit(0);
 	}
-	win = mlx_new_window(ptr, WIN_X, WIN_Y, "fractol");
+	win = mlx_new_window(ptr, first->win_x, first->win_y, "fractol");
 	first->ptr = ptr;
 	first->win = win;
-	if (!(first->img = mlx_new_image(ptr, WIN_X, WIN_Y)))
+	if (!(first->img = mlx_new_image(ptr, first->win_x, first->win_y)))
 	{
 		ft_putstr("manque de place pour new_image\n");
 		exit(0);
@@ -75,7 +77,7 @@ void	pixel_put_img(int x, int y, t_fract *curent, int color)
 	int		pixel;
 
 	pixel = x * 4 + y * curent->size_line;
-	if (pixel < 0 || pixel > WIN_X * WIN_Y * 4)
+	if (pixel < 0 || pixel > curent->win_x * curent->win_y * 4)
 		return ;
 	curent->data[pixel] = color & 0xFF;
 	curent->data[pixel + 1] = color >> 8 & 0xFF;
@@ -89,7 +91,7 @@ int		set_color(t_maths *tools, t_fract *first)
 			((tools->i * first->b) * first->color_value));
 }
 
-void	init_maths(t_maths **tools)
+void	init_maths(t_maths **tools, t_fract *first)
 {
 	if (!(*tools = (t_maths *)malloc(sizeof(t_maths))))
 	{
@@ -102,10 +104,12 @@ void	init_maths(t_maths **tools)
 	(*tools)->zr = 0;
 	(*tools)->zi = 0;
 	(*tools)->i = 0;
-	(*tools)->zoomx = 0;
-	(*tools)->zoomy = 0;
+	(*tools)->x = 0;
+	(*tools)->y = 0;
 	(*tools)->x1 = -2.1;
 	(*tools)->x2 = 0.6;
 	(*tools)->y1 = -1.2;
 	(*tools)->y2 = 1.2;
+	(*tools)->zoomx = first->win_x / (first->tools->x2 - first->tools->x1);
+	(*tools)->zoomy = first->win_y / (first->tools->y2 - first->tools->y1);
 }

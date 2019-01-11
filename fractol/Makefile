@@ -6,7 +6,7 @@
 #    By: jubeal <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 10:38:34 by jubeal            #+#    #+#              #
-#    Updated: 2019/01/10 16:19:18 by jubeal           ###   ########.fr        #
+#    Updated: 2019/01/11 14:52:08 by jubeal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ CPPFLAGS = -I./includes/
 SRC_NAME =	main.c \
 			Mandelbrot.c \
 			initialisation.c \
-			movement.c
+			movement.c \
+			Julia.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
