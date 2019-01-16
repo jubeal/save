@@ -23,12 +23,12 @@ void	translate(t_fract *first, int key)
 	if (key == 123)
 		first->tools->x -= 10;
 	ft_bzero(first->data, first->win_x * first->win_y * 4);
-	Mandelbrot(first);
+	fractol(first);
 }
 
 void	zoom(t_fract *first, int key)
 {
-	if (key == 78)
+	if (key == 69)
 	{
 		first->tools->x /= 1.2;
 		first->tools->y /= 1.2;
@@ -38,7 +38,7 @@ void	zoom(t_fract *first, int key)
 		first->tools->y -= first->win_y / 12;
 		first->tools->iter_max -= 3;
 	}
-	if (key == 69)
+	if (key == 78)
 	{
 		first->tools->x += first->win_x / 12;
 		first->tools->y += first->win_y / 12;
@@ -49,5 +49,5 @@ void	zoom(t_fract *first, int key)
 		first->tools->iter_max += 3;
 	}
 	ft_bzero(first->data, first->win_x * first->win_y * 4);
-	Mandelbrot(first);
+	fractol(first);
 }

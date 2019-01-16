@@ -66,4 +66,5 @@ void				translate(t_fract *first, int key);
 void				fractol(t_fract *first);
 void				zoom(t_fract *first, int key);
 void				Julia(t_fract *first);
+void				Buddhabrot(t_fract *first);
 #endif

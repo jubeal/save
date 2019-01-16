@@ -22,7 +22,7 @@ OBJ_PATH = ./objs/
 
 INC_PATH = ./includes/
 
-CPPFLAGS = -I./includes/
+CPPFLAGS = -I./includes/ -I../../minilibx/sierra/
 
 #Name
 
@@ -30,7 +30,8 @@ SRC_NAME =	main.c \
 			Mandelbrot.c \
 			initialisation.c \
 			movement.c \
-			Julia.c
+			Julia.c \
+			Buddhabrot.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -42,7 +43,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 #Flags
 
-LDFLAGS = -L./libft/
+LDFLAGS = -L./libft/ -L../../minilibx/sierra/
 
 LFT = -lft
 

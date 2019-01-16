@@ -48,7 +48,7 @@ static void		fractol_choice(t_fract *first, char **av)
 			first->type = 1;
 		else if (!ft_strcmp("Julia", av[i]))
 			first->type = 2;
-		else if (!ft_strcmp("Autre", av[i]))
+		else if (!ft_strcmp("Buddhabrot", av[i]))
 			first->type = 3;
 		else
 			error(3);
@@ -59,33 +59,33 @@ static void		fractol_choice(t_fract *first, char **av)
 
 void			fractol(t_fract *first)
 {
-	t_fract	*tmp;
-
-	tmp = first;
-	while (tmp)
-	{
-		open_windows(first);
 		if (first->type == 1)
 			Mandelbrot(first);
 		else if (first->type == 2)
 			Julia(first);
-		/*else
-			autre(first);*/
-		tmp = tmp->next;
-	}
+		else if (first->type == 3)
+			Buddhabrot(first);
 }
 
 int				main(int ac, char **av)
 {
 	t_fract	*first;
+	t_fract *tmp;
 
 	if (ac == 0)
 		error(1);
 	if (!init_fract(&first))
 		error(2);
 	fractol_choice(first, av);
-	fractol(first);
+	tmp = first;
+	while (tmp)
+	{
+		open_windows(tmp);
+		fractol(tmp);
+		tmp = tmp->next;
+	}
 	mlx_hook(first->win, 2, (1L << 1), deal_key, first);
+	mlx_mouse_hook(first->win, deal_key, first);
 	mlx_loop(first->ptr);
 	return (0);
 }

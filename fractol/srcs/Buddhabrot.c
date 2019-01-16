@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Julia.c                                            :+:      :+:    :+:   */
+/*   Buddhabrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/11 14:21:09 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/11 15:17:05 by jubeal           ###   ########.fr       */
+/*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
+/*   Updated: 2019/01/11 14:53:01 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	Julia(t_fract *first)
+void	Buddhabrot(t_fract *first)
 {
 	long double	tmp;
 	int			x;
@@ -33,8 +33,8 @@ void	Julia(t_fract *first)
 		x = first->tools->x;
 		while (x < first->win_x + first->tools->x)
 		{
-			first->tools->cr = 0.285;
-			first->tools->ci = 0.01;
+			first->tools->cr = 0.0;
+			first->tools->ci = -0.8;
 			first->tools->zr = (long double)x / first->tools->zoomx +
 				first->tools->x1;
 			first->tools->zi = (long double)y / first->tools->zoomy +
