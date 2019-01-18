@@ -6,13 +6,13 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/11 14:53:01 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:05:34 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	Buddhabrot(t_fract *first)
+void	Julia_2(t_fract *first)
 {
 	long double	tmp;
 	int			x;
@@ -21,8 +21,8 @@ void	Buddhabrot(t_fract *first)
 	if (!first->tools)
 	{
 		init_maths(&first->tools, first);
-		first->tools->x1 = -1;
-		first->tools->x2 = 1;
+		first->tools->x1 = -1.3;
+		first->tools->x2 = 0.7;
 		first->tools->y1 = -1.2;
 		first->tools->y2 = 1.2;
 		first->tools->iter_max = 150;

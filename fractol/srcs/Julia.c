@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 14:21:09 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/11 15:17:05 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:07:47 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	Julia(t_fract *first)
 	if (!first->tools)
 	{
 		init_maths(&first->tools, first);
-		first->tools->x1 = -1;
-		first->tools->x2 = 1;
+		first->tools->x1 = -1.3;
+		first->tools->x2 = 0.7;
 		first->tools->y1 = -1.2;
 		first->tools->y2 = 1.2;
 		first->tools->iter_max = 150;
@@ -46,8 +46,10 @@ void	Julia(t_fract *first)
 			{
 				tmp = first->tools->zr;
 				first->tools->zr = first->tools->zr * first->tools->zr -
-					first->tools->zi * first->tools->zi + first->tools->cr;
-				first->tools->zi = 2 * first->tools->zi * tmp + first->tools->ci;
+					first->tools->zi * first->tools->zi + first->tools->cr +
+					((double)first->tools->mouse_x / first->win_x);
+				first->tools->zi = 2 * first->tools->zi * tmp + first->tools->ci +
+					((double)first->tools->mouse_y / first->win_y);
 				first->tools->i++;
 			}
 			if (first->tools->i != first->tools->iter_max)

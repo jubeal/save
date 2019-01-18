@@ -6,7 +6,7 @@
 #    By: jubeal <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 10:38:34 by jubeal            #+#    #+#              #
-#    Updated: 2019/01/11 14:52:08 by jubeal           ###   ########.fr        #
+#    Updated: 2019/01/18 16:39:52 by jubeal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ_PATH = ./objs/
 
 INC_PATH = ./includes/
 
-CPPFLAGS = -I./includes/ -I../../minilibx/sierra/
+CPPFLAGS = -I./includes/
 
 #Name
 
@@ -31,7 +31,7 @@ SRC_NAME =	main.c \
 			initialisation.c \
 			movement.c \
 			Julia.c \
-			Buddhabrot.c
+			Julia_2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -43,7 +43,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 #Flags
 
-LDFLAGS = -L./libft/ -L../../minilibx/sierra/
+LDFLAGS = -L./libft/ 
 
 LFT = -lft
 

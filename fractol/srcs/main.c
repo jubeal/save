@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/11 14:53:01 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:37:33 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,22 @@
 
 static int		deal_key(int key, t_fract *first)
 {
-	(void)first;
 	if (key == 53)
-		exit(0);
+		end_program(first);
 	if (key >= 123 && key <= 126)
 		translate(first, key);
 	if (key == 69 || key == 78)
-		zoom(first, key);
+		zoom(key, first);
+	if (key == 46 && first->tools->mouse_stop)
+		first->tools->mouse_stop = 0;
+	else if (key == 46 && !first->tools->mouse_stop)
+		first->tools->mouse_stop = 1;
+	if (key == 15)
+	{
+		free(first->tools);
+		first->tools = NULL;
+		fractol(first);
+	}
 	return (1);
 }
 
@@ -35,26 +44,17 @@ void			error(int n)
 	exit(0);
 }
 
-static void		fractol_choice(t_fract *first, char **av)
+void			fractol_choice(t_fract *first)
 {
-	int		i;
-	t_fract	*tmp;
 
-	i = 1;
-	tmp = first;
-	while (tmp)
-	{
-		if (!ft_strcmp("Mandelbrot", av[i]))
-			first->type = 1;
-		else if (!ft_strcmp("Julia", av[i]))
-			first->type = 2;
-		else if (!ft_strcmp("Buddhabrot", av[i]))
-			first->type = 3;
-		else
-			error(3);
-		i++;
-		tmp = tmp->next;
-	}
+	if (!ft_strcmp("Mandelbrot", first->av[first->i]))
+		first->type = 1;
+	else if (!ft_strcmp("Julia", first->av[first->i]))
+		first->type = 2;
+	else if (!ft_strcmp("Julia_2", first->av[first->i]))
+		first->type = 3;
+	else
+		error(3);
 }
 
 void			fractol(t_fract *first)
@@ -64,28 +64,23 @@ void			fractol(t_fract *first)
 		else if (first->type == 2)
 			Julia(first);
 		else if (first->type == 3)
-			Buddhabrot(first);
+			Julia_2(first);
 }
 
 int				main(int ac, char **av)
 {
 	t_fract	*first;
-	t_fract *tmp;
 
-	if (ac == 0)
+	if (ac == 1)
 		error(1);
-	if (!init_fract(&first))
+	if (!init_fract(&first, av))
 		error(2);
-	fractol_choice(first, av);
-	tmp = first;
-	while (tmp)
-	{
-		open_windows(tmp);
-		fractol(tmp);
-		tmp = tmp->next;
-	}
+	fractol_choice(first);
+	open_windows(first);
+	fractol(first);
 	mlx_hook(first->win, 2, (1L << 1), deal_key, first);
-	mlx_mouse_hook(first->win, deal_key, first);
+	mlx_mouse_hook(first->win, zoom, first);
+	mlx_hook(first->win, 6, 1L << 6, mouse_move_hook, first);
 	mlx_loop(first->ptr);
 	return (0);
 }

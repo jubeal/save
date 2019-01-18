@@ -6,43 +6,25 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 15:23:43 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/11 14:51:20 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:25:28 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		init_fract(t_fract **first)
+int		init_fract(t_fract **first, char **av)
 {
-	t_fract	*tmp;
-
-	tmp = *first;
-	if (!tmp)
-	{
-		if (!(tmp = (t_fract *)malloc(sizeof(t_fract))))
-			return (0);
-		*first = tmp;
-	}
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		if (!(tmp->next = (t_fract *)malloc(sizeof(t_fract))))
-			return (0);
-		tmp = tmp->next;
-	}
-	tmp->win_x = 540;
-	tmp->win_y = 480;
-	tmp->ptr = NULL;
-	tmp->win = NULL;
-	tmp->img = NULL;
-	tmp->data = NULL;
-	tmp->next = NULL;
-	tmp->tools = NULL;
-	tmp->color_value = 3;
-	tmp->r = 5;
-	tmp->g = 10;
-	tmp->b = 2;
+	if (!(*first = (t_fract *)malloc(sizeof(t_fract))))
+		return (0);
+	(*first)->win_x = 540;
+	(*first)->win_y = 480;
+	(*first)->tools = NULL;
+	(*first)->i = 1;
+	(*first)->av = av;
+	(*first)->color_value = 3;
+	(*first)->r = 5;
+	(*first)->g = 10;
+	(*first)->b = 2;
 	return (1);
 }
 
@@ -99,10 +81,6 @@ void	init_maths(t_maths **tools, t_fract *first)
 		exit(0);
 	}
 	(*tools)->iter_max = 50;
-	(*tools)->cr = 0;
-	(*tools)->ci = 0;
-	(*tools)->zr = 0;
-	(*tools)->zi = 0;
 	(*tools)->i = 0;
 	(*tools)->x = 0;
 	(*tools)->y = 0;
@@ -112,4 +90,7 @@ void	init_maths(t_maths **tools, t_fract *first)
 	(*tools)->y2 = 1.2;
 	(*tools)->zoomx = first->win_x / (first->tools->x2 - first->tools->x1);
 	(*tools)->zoomy = first->win_y / (first->tools->y2 - first->tools->y1);
+	(*tools)->mouse_x = 0;
+	(*tools)->mouse_y = 0;
+	(*tools)->mouse_stop = 1;
 }
