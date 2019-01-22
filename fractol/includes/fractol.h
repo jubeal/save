@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:17:58 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/18 16:37:54 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:25:29 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ typedef struct		s_fract
 	int				b;
 	int				i;
 	char			**av;
+	int				trans_x;
+	int				trans_y;
+	int				trans_stop;
 	t_maths			*tools;
 }					t_fract;
 
-void				Mandelbrot(t_fract *first);
+void				mandelbrot(t_fract *first);
 int					init_fract(t_fract **first, char **av);
 void				open_windows(t_fract *first);
 void				init_maths(t_maths **tools, t_fract *first);
@@ -69,9 +72,10 @@ int					set_color(t_maths *tools, t_fract *first);
 void				translate(t_fract *first, int key);
 void				fractol(t_fract *first);
 int					zoom(int key, t_fract *first);
-void				Julia(t_fract *first);
-void				Julia_2(t_fract *first);
+void				julia(t_fract *first);
+void				julia_2(t_fract *first);
 int					mouse_move_hook(int x, int y, t_fract *first);
 void				end_program(t_fract *first);
 void				fractol_choice(t_fract *first);
+int					mouse_key(int key, int x, int y, t_fract *first);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:20:08 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/18 16:39:29 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:00:10 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	translate(t_fract *first, int key)
 
 int		zoom(int key, t_fract *first)
 {
-	if (key == 78 || key == 4)
+	if (key == 4)
 	{
+		if (first->tools->zoomx / 1.2 < 10)
+			return (0);
 		first->tools->x /= 1.2;
 		first->tools->y /= 1.2;
 		first->tools->zoomx /= 1.2;
@@ -37,10 +39,8 @@ int		zoom(int key, t_fract *first)
 		first->tools->x -= first->win_x / 12;
 		first->tools->y -= first->win_y / 12;
 		first->tools->iter_max -= 3;
-		ft_bzero(first->data, first->win_x * first->win_y * 4);
-		fractol(first);
 	}
-	if (key == 69 || key == 5)
+	if (key == 5)
 	{
 		first->tools->x += first->win_x / 12;
 		first->tools->y += first->win_y / 12;
@@ -49,10 +49,10 @@ int		zoom(int key, t_fract *first)
 		first->tools->zoomx *= 1.2;
 		first->tools->zoomy *= 1.2;
 		first->tools->iter_max += 3;
-		ft_bzero(first->data, first->win_x * first->win_y * 4);
-		fractol(first);
 	}
-	return (1);
+	ft_bzero(first->data, first->win_x * first->win_y * 4);
+	fractol(first);
+	return (0);
 }
 
 int		mouse_move_hook(int x, int y, t_fract *first)

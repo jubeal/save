@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/18 16:37:33 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:50:20 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int		deal_key(int key, t_fract *first)
 		end_program(first);
 	if (key >= 123 && key <= 126)
 		translate(first, key);
-	if (key == 69 || key == 78)
-		zoom(key, first);
 	if (key == 46 && first->tools->mouse_stop)
 		first->tools->mouse_stop = 0;
 	else if (key == 46 && !first->tools->mouse_stop)
@@ -28,6 +26,7 @@ static int		deal_key(int key, t_fract *first)
 	{
 		free(first->tools);
 		first->tools = NULL;
+		ft_bzero(first->data, first->win_x * first->win_y * 4);
 		fractol(first);
 	}
 	return (1);
@@ -46,7 +45,6 @@ void			error(int n)
 
 void			fractol_choice(t_fract *first)
 {
-
 	if (!ft_strcmp("Mandelbrot", first->av[first->i]))
 		first->type = 1;
 	else if (!ft_strcmp("Julia", first->av[first->i]))
@@ -59,12 +57,12 @@ void			fractol_choice(t_fract *first)
 
 void			fractol(t_fract *first)
 {
-		if (first->type == 1)
-			Mandelbrot(first);
-		else if (first->type == 2)
-			Julia(first);
-		else if (first->type == 3)
-			Julia_2(first);
+	if (first->type == 1)
+		mandelbrot(first);
+	else if (first->type == 2)
+		julia(first);
+	else if (first->type == 3)
+		julia_2(first);
 }
 
 int				main(int ac, char **av)
@@ -79,8 +77,8 @@ int				main(int ac, char **av)
 	open_windows(first);
 	fractol(first);
 	mlx_hook(first->win, 2, (1L << 1), deal_key, first);
-	mlx_mouse_hook(first->win, zoom, first);
-	mlx_hook(first->win, 6, 1L << 6, mouse_move_hook, first);
+	mlx_mouse_hook(first->win, mouse_key, first);
+	mlx_hook(first->win, 6, (1L << 6), mouse_move_hook, first);
 	mlx_loop(first->ptr);
 	return (0);
 }

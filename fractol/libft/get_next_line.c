@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:49:37 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/26 17:52:25 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 16:31:13 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,13 @@ static int			fill_final(long car_read, char **final,
 	return (0);
 }
 
-static int			process(char **final, t_list_fd **current)
+static int			process(char **final, t_list_fd **current, int test)
 {
 	long		car_read;
 	char		*buff;
-	int			test;
 	long		i;
 
 	car_read = BUFF_SIZE;
-	test = 1;
 	if (!(buff = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	while (car_read == BUFF_SIZE && test)
@@ -112,7 +110,8 @@ int					get_next_line(const int fd, char **line)
 	int					ret;
 	t_list_fd			*current;
 
-	if (BUFF_SIZE < 1 || fd < 0 || !line || !(current = pick_up_good_one(fd, &rest)))
+	if (BUFF_SIZE < 1 || fd < 0 || !line ||
+			!(current = pick_up_good_one(fd, &rest)))
 		return (-1);
 	if (!current->rest)
 	{
@@ -122,7 +121,7 @@ int					get_next_line(const int fd, char **line)
 	}
 	else if (!fill_with_rest(&final, &current) && (*line = final))
 		return (1);
-	if (final == NULL || (ret = process(&final, &current)) == -1)
+	if (final == NULL || (ret = process(&final, &current, 1)) == -1)
 		return (-1);
 	*line = final;
 	if ((*line)[0] == '\0' && !ret)

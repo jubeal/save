@@ -6,7 +6,7 @@
 #    By: jubeal <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 10:38:34 by jubeal            #+#    #+#              #
-#    Updated: 2019/01/18 16:39:52 by jubeal           ###   ########.fr        #
+#    Updated: 2019/01/22 16:53:00 by jubeal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,17 @@ OBJ_PATH = ./objs/
 
 INC_PATH = ./includes/
 
-CPPFLAGS = -I./includes/
+CPPFLAGS = -I./includes/ -I /usr/local/include
 
 #Name
 
 SRC_NAME =	main.c \
-			Mandelbrot.c \
 			initialisation.c \
 			movement.c \
-			Julia.c \
-			Julia_2.c
+			mouse_move.c \
+			mandelbrot.c \
+			julia.c \
+			julia_2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -43,7 +44,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 #Flags
 
-LDFLAGS = -L./libft/ 
+LDFLAGS = -L./libft/ -lft -L /usr/local/lib
 
 LFT = -lft
 
