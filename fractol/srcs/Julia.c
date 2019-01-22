@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 14:21:09 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/22 16:40:10 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 21:21:56 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,33 @@ static void	calcul(t_fract *first, int x, int y)
 				set_color(first->tools, first));
 }
 
-void		julia(t_fract *first)
+static void	*pixel_choice(void *data)
 {
 	int			x;
 	int			y;
+	int			part;
+	t_thread	*threads;
+
+	threads = (t_thread *)data;
+	part = threads->first->win_y / 8;
+	y = part * threads->idx + threads->first->tools->y;
+	while (y < part * (threads->idx + 1) + threads->first->tools->y)
+	{
+		x = threads->first->tools->x;
+		while (x < threads->first->win_x + threads->first->tools->x)
+		{
+			calcul(threads->first, x, y);
+			x++;
+		}
+		y++;
+	}
+	pthread_exit(NULL);
+}
+
+void		julia(t_fract *first)
+{
+	int			idx;
+	t_thread	**threads;
 
 	if (!first->tools)
 	{
@@ -54,16 +77,25 @@ void		julia(t_fract *first)
 		first->tools->y2 = 1.2;
 		first->tools->iter_max = 150;
 	}
-	y = first->tools->y;
-	while (y < first->win_y + first->tools->y)
+	if (!(threads = (t_thread **)malloc(sizeof(t_thread *) * 8)))
+		return ;
+	idx = -1;
+	while (++idx < 8)
 	{
-		x = first->tools->x;
-		while (x < first->win_x + first->tools->x)
-		{
-			calcul(first, x, y);
-			x++;
-		}
-		y++;
+		if (!(threads[idx] = (t_thread *)malloc(sizeof(t_thread))))
+			return ;
+		threads[idx]->first = first;
+		threads[idx]->idx = idx;
+		if ((pthread_create(&threads[idx]->thread, NULL, pixel_choice,
+						threads[idx])) == -1)
+			return ;
+	}
+	idx = -1;
+	while (++idx < 8)
+	{
+		if (pthread_join(threads[idx]->thread, NULL))
+			return ;
+		free(threads[idx]);
 	}
 	mlx_put_image_to_window(first->ptr, first->win, first->img, 0, 0);
 }

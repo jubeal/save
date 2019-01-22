@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:17:58 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/22 16:25:29 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/22 20:36:28 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_H
 # include <math.h>
 # include <mlx.h>
+# include <pthread.h>
 # include "get_next_line.h"
 # define WIN_X 540
 # define WIN_Y 480
@@ -62,6 +63,13 @@ typedef struct		s_fract
 	int				trans_stop;
 	t_maths			*tools;
 }					t_fract;
+
+typedef struct		s_thread
+{
+	pthread_t		thread;
+	int				idx;
+	t_fract			*first;
+}					t_thread;
 
 void				mandelbrot(t_fract *first);
 int					init_fract(t_fract **first, char **av);
