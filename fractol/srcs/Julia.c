@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 14:21:09 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/22 21:21:56 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/30 15:15:18 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	*pixel_choice(void *data)
 	threads = (t_thread *)data;
 	part = threads->first->win_y / 8;
 	y = part * threads->idx + threads->first->tools->y;
-	while (y < part * (threads->idx + 1) + threads->first->tools->y)
+	while (y < (part * (threads->idx + 1)) + threads->first->tools->y)
 	{
 		x = threads->first->tools->x;
 		while (x < threads->first->win_x + threads->first->tools->x)
@@ -87,15 +87,20 @@ void		julia(t_fract *first)
 		threads[idx]->first = first;
 		threads[idx]->idx = idx;
 		if ((pthread_create(&threads[idx]->thread, NULL, pixel_choice,
-						threads[idx])) == -1)
+						threads[idx])))
 			return ;
+		/*if (pthread_join(threads[idx]->thread, NULL))
+			return ;
+		free(threads[idx]);*/
 	}
-	idx = -1;
-	while (++idx < 8)
+	idx = 0;
+	while (idx < 8)
 	{
 		if (pthread_join(threads[idx]->thread, NULL))
 			return ;
 		free(threads[idx]);
+		idx++;
 	}
+	free(threads);
 	mlx_put_image_to_window(first->ptr, first->win, first->img, 0, 0);
 }

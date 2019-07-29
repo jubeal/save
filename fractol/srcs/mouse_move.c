@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 15:20:46 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/22 16:20:55 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/24 14:30:46 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			mouse_key(int key, int x, int y, t_fract *first)
 {
 	if (key == 4 || key == 5)
 		zoom(key, first);
-	if (key == 1)
+	if (key == 1 && x >= 0 && y >= 0)
 	{
 		first->trans_stop != 0 ? first->trans_stop = 0 : first->trans_stop++;
 		first->trans_x = x;

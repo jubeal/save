@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:36:03 by jubeal            #+#    #+#             */
-/*   Updated: 2019/01/22 16:50:20 by jubeal           ###   ########.fr       */
+/*   Updated: 2019/01/30 15:35:53 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,19 @@ static int		deal_key(int key, t_fract *first)
 void			error(int n)
 {
 	if (n == 1)
-		ft_putstr("usage: ./fractol fractol_type\n");
-	if (n == 2)
+	{
+		ft_putstr("usage: ./fractol fractol_type. Enter ");
+		ft_putstr("\"./fractol help\" to see all types of fractol\n");
+	}
+	else if (n == 2)
 		ft_putstr("error\n");
-	if (n == 3)
-		ft_putstr("error: unknown fractol_type. Enter ./fractol ?\n");
+	else if (n == 3)
+		ft_putstr("error: unknown fractol_type\n");
+	else if (n == 4)
+	{
+		ft_putstr("The differents types of fractol are : ");
+		ft_putstr("Mandelbrot, Julia, Julia_2\n");
+	}
 	exit(0);
 }
 
@@ -51,6 +59,8 @@ void			fractol_choice(t_fract *first)
 		first->type = 2;
 	else if (!ft_strcmp("Julia_2", first->av[first->i]))
 		first->type = 3;
+	else if (!ft_strcmp("help", first->av[first->i]))
+		error(4);
 	else
 		error(3);
 }
