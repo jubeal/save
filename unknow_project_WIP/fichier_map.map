@@ -1,0 +1,13 @@
+/* mesh name or # + obj path / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / visibility off = * */
+
+plane: 0.0 0.0 0.0 10.0 0.0 10.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 *
+
+cube: -5.0 0.0 5.0 10.0 2.0 0.1 NULL 100.0 0.0 0.0 0.0
+cube: -5.0 0.0 -5.0 10.0 2.0 0.1 NULL 100.0 0.0 0.0 0.0
+cube: -5.0 0.0 5.0 10.0 2.0 0.1 NULL 100.0 0.0 90.0 0.0
+cube: 5.0 0.0 5.0 10.0 2.0 0.1 NULL 100.0 0.0 90.0 0.0
+
+cube: 4.0 0.0 5.0 1.0 2.0 0.1 NULL 100.0 0.0 70.0 0.0
+
+# serpentine_city.obj 2.0 2.0 0.0 0.1 0.11 0.1 NULL 10.0 0.0 90.0 0.0
+# Rock1.obj 0.0 2.0 2.0 0.1 0.11 0.1 NULL 10.0 0.0 0.0 0.0
