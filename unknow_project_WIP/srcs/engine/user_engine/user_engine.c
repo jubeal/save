@@ -22,19 +22,19 @@ t_user_engine	*initialize_t_user_engine()
 	return (result);
 }
 
-void			free_t_user_engine(t_user_engine dest)
+void			delete_t_user_engine(t_user_engine dest)
 {
 	free(dest.mouse);
 	free(dest.keyboard);
 }
 
-void			delete_t_user_engine(t_user_engine *dest)
+void			free_t_user_engine(t_user_engine *dest)
 {
-	free_t_user_engine(*dest);
+	delete_t_user_engine(*dest);
 	free(dest);
 }
 
-void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam)
+void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam, t_physic_engine *physic_engine)
 {
 	t_mouse *mouse = user_engine->mouse;
 	t_keyboard *keyboard = user_engine->keyboard;
@@ -42,7 +42,7 @@ void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam)
 	if (mouse->button[MOUSE_LEFT] == BOOL_TRUE)
 		handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
 
-	handle_t_camera_mouvement_by_key(cam, keyboard); // deplacement cameras
+	handle_t_camera_mouvement_by_key(cam, keyboard, physic_engine); // deplacement cameras
 
 	compute_t_camera(cam);
 }

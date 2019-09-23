@@ -72,16 +72,16 @@ void	t_vector4_list_add_back(t_vector4_list *dest, t_vector4 *to_add)
 	(dest->size)++;
 }
 
-void	free_t_vector4_list(t_vector4_list dest)
+void	delete_t_vector4_list(t_vector4_list dest)
 {
 	free(dest.vector);
 	dest.vector = NULL;
 	dest.size = 0;
 }
 
-void	delete_t_vector4_list(t_vector4_list *dest)
+void	free_t_vector4_list(t_vector4_list *dest)
 {
-	free_t_vector4_list(*dest);
+	delete_t_vector4_list(*dest);
 	free(dest);
 }
 

@@ -11,6 +11,10 @@
 # include "unknow_project_engine.h"
 # include "unknow_project_list.h"
 # include "unknow_project_algorythm.h"
+# include "unknow_project_gui.h"
+# include "unknow_project_game_engine.h"
+# include "unknow_project_player.h"
+# include "unknow_project_item.h"
 
 //			PNG reader
 t_texture 	*png_load(char *path);

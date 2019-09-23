@@ -32,5 +32,15 @@ typedef struct	s_line
 
 t_line			create_t_line(t_vector3 p_a, t_vector3 p_b);
 t_line			*initialize_t_line(t_vector3 p_a, t_vector3 p_b);
+void			print_t_line(t_line line, char *str);
+
+typedef struct	s_rectangle
+{
+	t_vector2	pos;
+	t_vector2	size;
+}				t_rectangle;
+
+t_rectangle		create_t_rectangle(t_vector2 p_pos, t_vector2 p_size);
+t_rectangle		*initialize_t_rectangle(t_vector2 p_pos, t_vector2 p_size);
 
 #endif

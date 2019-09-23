@@ -47,7 +47,7 @@ t_mesh_list		read_map_file(char *path)
 				if (ft_strcmp(line_split[0], "plane:") == 0)
 					mesh = create_primitive_plane(vector[0], vector[1], texture, ft_atof(line_split[8]));
 				else if (ft_strcmp(line_split[0], "cube:") == 0)
-					mesh = create_primitive_cube(vector[0], vector[1], texture, ft_atof(line_split[8]));
+					mesh = create_primitive_cube(vector[0], vector[1], texture, ft_atof(line_split[8]), NULL);
 				else if (i > 0)
 					mesh = read_obj_file(line_split[1], vector[0], vector[1], ft_atof(line_split[9]));
 				if (texture == NULL && color != NULL)

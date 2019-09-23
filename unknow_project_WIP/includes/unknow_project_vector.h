@@ -45,6 +45,7 @@ typedef struct	s_vector2
 t_vector2	create_t_vector2(float p_x, float p_y);
 t_vector2	*initialize_t_vector2(float p_x, float p_y);
 void 		print_t_vector2(t_vector2 vector, char *str);
+t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2);
 
 typedef struct	s_vector4_int
 {

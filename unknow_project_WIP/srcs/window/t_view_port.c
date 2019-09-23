@@ -7,11 +7,9 @@ t_view_port	create_t_view_port(t_window *p_window, t_vector2_int p_pos, t_vector
 	result.window = p_window;
 	result.pos = create_t_vector2_int(0, 0);
 	result.size = create_t_vector2_int(0, 0);
-
-
-	if (!(result.depth_buffer = (float *)malloc(sizeof(float) * p_window->size_x * p_window->size_y)))
+	if (!(result.depth_buffer = (float *)malloc(sizeof(float) \
+								* p_window->size_x * p_window->size_y)))
 		error_exit(-456, "Can't malloc a float array properly");
-
 	move_t_view_port(&result, p_pos);
 	resize_t_view_port(&result, p_size);
 	return (result);
@@ -23,9 +21,7 @@ t_view_port	*initialize_t_view_port(t_window *p_window, t_vector2_int p_pos, t_v
 
 	if (!(result = (t_view_port *)malloc(sizeof(t_view_port))))
 		return (NULL);
-
 	*result = create_t_view_port(p_window, p_pos, p_size);
-
 	return (result);
 }
 
@@ -39,7 +35,6 @@ void		move_t_view_port(t_view_port *view, t_vector2_int new_pos)
 		new_pos.x = 0;
 	if (new_pos.y < 0)
 		new_pos.y = 0;
-
 	view->pos = new_pos;
 }
 
@@ -51,7 +46,6 @@ void		resize_t_view_port(t_view_port *view, t_vector2_int new_size)
 		new_size.x = view->window->size_x - view->pos.x - 1;
 	if (view->pos.y + new_size.y >= view->window->size_y)
 		new_size.y = view->window->size_y - view->pos.y - 1;
-
 	view->size = new_size;
 }
 
@@ -59,16 +53,18 @@ void		t_view_port_change_window(t_view_port *view, t_window *p_window)
 {
 	view->window = p_window;
 	free(view->depth_buffer);
-	if (!(view->depth_buffer = (float *)malloc(sizeof(float) * p_window->size_x * p_window->size_y)))
+	if (!(view->depth_buffer = (float *)malloc(sizeof(float) \
+									* p_window->size_x * p_window->size_y)))
 		error_exit(-456, "Can't malloc a float array properly");
 	move_t_view_port(view, view->pos);
 	resize_t_view_port(view, view->size);
 }
 
-void 		t_view_port_clear_buffers(t_view_port *view)
+void		t_view_port_clear_buffers(t_view_port *view)
 {
-	for (int i = 0; i < view->window->size_x * view->window->size_y; i++)
-	{
+	int i;
+
+	i = -1;
+	while (++i < view->window->size_x * view->window->size_y)
 		view->depth_buffer[i] = INT_MAX;
-	}
 }

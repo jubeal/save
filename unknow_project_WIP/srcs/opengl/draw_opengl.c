@@ -132,48 +132,33 @@
 // 	glDrawArrays(GL_LINES, 0, 2);
 // }
 //
-void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
+void	draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color *p_color)
 {
-	GLfloat vertex_buffer_data[] = {
+	GLfloat vertex_buffer_data[9] = {
 		p_triangle->a.x, p_triangle->a.y, 0.0f,
 		p_triangle->b.x, p_triangle->b.y, 0.0f,
 		p_triangle->c.x, p_triangle->c.y, 0.0f,
 	};
-
-	GLfloat color_buffer_data[] = {
-		p_color->r,  p_color->g,  p_color->b, p_color->a,
-		p_color->r,  p_color->g,  p_color->b, p_color->a,
-		p_color->r,  p_color->g,  p_color->b, p_color->a,
+	GLfloat color_buffer_data[12] = {
+		p_color->r, p_color->g, p_color->b, p_color->a,
+		p_color->r, p_color->g, p_color->b, p_color->a,
+		p_color->r, p_color->g, p_color->b, p_color->a,
 	};
 
-	// bind VAO
 	glBindVertexArray(p_win->vertex_array);
-
-	// bind vertex_buffer
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-	// donne a vertex_buffer vertex_buffer_data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data), vertex_buffer_data, GL_STATIC_DRAW);
-
-	// bind color_buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data),\
+					vertex_buffer_data, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
-	// donne a color_buffer color_buffer_data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data, GL_STATIC_DRAW);
-
-	// indique le shader a utiliser
+	glBufferData(GL_ARRAY_BUFFER, sizeof(color_buffer_data), color_buffer_data,\
+					GL_STATIC_DRAW);
 	glUseProgram(p_win->program_color);
-
-	// indique la location du shader utiliser
 	glEnableVertexAttribArray(0);
-	// quelle est le buffer a utiliser
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_buffer);
-	// comment utiliser le buffer
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_buffer);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	// dessine un triangle
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 //
@@ -229,28 +214,21 @@ void draw_triangle_color_opengl(t_window *p_win, t_triangle *p_triangle, t_color
 // 	glBindTexture(GL_TEXTURE_2D, 0);
 // }
 
-void draw_buffer_opengl(t_window *p_win, t_color *color_data)
+void	draw_buffer_opengl(t_window *p_win, t_color *color_data)
 {
-	int screen_len;
+	int	screen_len;
 
 	screen_len = p_win->size_x * p_win->size_y;
-
 	glBindVertexArray(p_win->vertex_array);
-
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_fixed_buffer);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 4 * screen_len, color_data);
-
-	// indique le shader a utiliser
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 4 * screen_len,\
+									color_data);
 	glUseProgram(p_win->program_color);
-
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->vertex_fixed_buffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, p_win->color_fixed_buffer);
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	// dessine un point
-	glDrawArrays( GL_POINTS, 0, screen_len);
+	glDrawArrays(GL_POINTS, 0, screen_len);
 }

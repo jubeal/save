@@ -69,14 +69,14 @@ void			t_camera_list_add_back(t_camera_list *dest, t_camera *to_add)
 	(dest->size)++;
 }
 
-void			free_t_camera_list(t_camera_list dest)
+void			delete_t_camera_list(t_camera_list dest)
 {
 	free(dest.camera);
 }
 
-void			delete_t_camera_list(t_camera_list *dest)
+void			free_t_camera_list(t_camera_list *dest)
 {
-	free_t_camera_list(*dest);
+	delete_t_camera_list(*dest);
 	free(dest);
 }
 

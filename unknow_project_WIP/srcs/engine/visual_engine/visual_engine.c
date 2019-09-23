@@ -25,14 +25,14 @@ t_visual_engine	*initialize_t_visual_engine(t_window *p_window)
 	return (result);
 }
 
-void			free_t_visual_engine(t_visual_engine dest)
+void			delete_t_visual_engine(t_visual_engine dest)
 {
-	delete_t_camera_list(dest.camera_list);
+	free_t_camera_list(dest.camera_list);
 }
 
-void			delete_t_visual_engine(t_visual_engine *dest)
+void			free_t_visual_engine(t_visual_engine *dest)
 {
-	free_t_visual_engine(*dest);
+	delete_t_visual_engine(*dest);
 	free(dest);
 }
 

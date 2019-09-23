@@ -12,7 +12,7 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 	int		i;
 	t_face	tmp_face;
 
-	result = create_t_mesh(pos);
+	result = create_t_mesh(pos, NULL);
 	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
 

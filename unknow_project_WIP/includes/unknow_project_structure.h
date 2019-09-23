@@ -34,6 +34,7 @@ typedef struct	s_texture
 {
 	t_surface	*surface;
 	GLuint		id;
+	char		letter;
 }				t_texture;
 
 t_color			get_pixel_color(t_texture *texture, int x, int y);

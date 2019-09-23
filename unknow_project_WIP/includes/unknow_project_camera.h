@@ -1,7 +1,6 @@
 #ifndef UNKNOW_PROJECT_CAMERA_H
 # define UNKNOW_PROJECT_CAMERA_H
 
-// #include "unknow_project_vector.h"
 #include "unknow_project_window.h"
 #include "unknow_project_math.h"
 #include "unknow_project_system.h"
@@ -10,6 +9,7 @@
 
 typedef struct	s_camera
 {
+	t_mesh		*body;
 	t_view_port *view_port;
 
 	t_matrix	model;
@@ -56,9 +56,8 @@ t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_
 void		t_camera_set_view_port(t_camera *camera, t_vector2_int new_pos, t_vector2_int new_size);
 void		t_camera_change_window(t_camera *camera, t_window *new_window);
 void		t_camera_change_view_port(t_camera *camera, t_view_port *new_view_port);
-void		free_t_cam(t_camera dest);
-void		delete_t_cam(t_camera *dest);
-void		move_camera(t_camera *camera, t_vector3 mouvement);
+void		delete_t_cam(t_camera dest);
+void		free_t_cam(t_camera *dest);
 void		translate_camera(t_camera *camera, t_vector3 mouvement);
 t_matrix	compute_projection_matrix(t_camera *p_cam);
 void		compute_t_camera(t_camera *cam);
@@ -68,12 +67,12 @@ t_matrix	t_camera_compute_view(t_camera *cam);
 void		t_camera_look_at_point(t_camera *cam, t_vector3 target);
 void		t_camera_look_at(t_camera *cam);
 void		t_camera_change_view(t_camera *cam, float delta_yaw, float delta_pitch);
-void		handle_t_camera_mouvement_by_key(t_camera *cam, t_keyboard *p_keyboard);
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse);
 int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 *p_points_uv);
 void		draw_triangle_from_camera_on_screen(t_camera *p_cam);
 void 		t_camera_calc_depth(t_camera *p_cam);
 void		draw_depth_from_camera_on_screen(t_camera *p_cam);
 void		clean_t_camera(t_camera *camera);
+void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic);
 
 #endif

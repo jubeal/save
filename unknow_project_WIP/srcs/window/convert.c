@@ -7,7 +7,6 @@ t_vector3		convert_screen_to_opengl(t_view_port *p_view_port, t_vector3 source)
 	result.x = source.x / ((float)(p_view_port->size.x) / 2.0) - 1.0f;
 	result.y = -(source.y / ((float)(p_view_port->size.y) / 2.0) - 1.0f);
 	result.z = source.z;
-
 	return (result);
 }
 
@@ -17,18 +16,16 @@ t_vector2		convert_vector2_to_opengl(t_view_port *p_view_port, t_vector2 source)
 
 	result.x = source.x / ((float)(p_view_port->size.x) / 2.0) - 1.0f;
 	result.y = -(source.y / ((float)(p_view_port->size.y) / 2.0) - 1.0f);
-
 	return (result);
 }
 
-t_vector3	convert_opengl_to_vector3(t_view_port *p_view_port, t_vector3 source)
+t_vector3		convert_opengl_to_vector3(t_view_port *p_view_port, t_vector3 source)
 {
 	t_vector3 result;
 
 	result.x = (source.x + 1.0f) * ((float)(p_view_port->size.x) / 2.0);
 	result.y = (-(source.y) + 1.0f) * ((float)(p_view_port->size.y) / 2.0);
 	result.z = source.z;
-
 	return (result);
 }
 
@@ -57,15 +54,13 @@ float			radius_to_degree(float radian)
 	return ((float)((float)(radian * 180) / M_PI));
 }
 
-t_uv 			convert_t_uv_to_texture(t_uv *source)
+t_uv			convert_t_uv_to_texture(t_uv *source)
 {
 	t_uv		result;
 
 	result = *source;
-
 	result.uv.a.y = 1 - result.uv.a.y;
 	result.uv.b.y = 1 - result.uv.b.y;
 	result.uv.c.y = 1 - result.uv.c.y;
-
 	return (result);
 }

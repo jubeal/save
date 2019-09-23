@@ -35,6 +35,8 @@ t_rasterizer	*initialize_t_rasterizer(t_vector3 s, t_vector3 e, t_vector3 ext);
 float 			apply_formula(t_rasterizer *rast, float x, float y);
 float			calc_rasterizer(t_rasterizer *rast, float x, float y);
 
+
+char			*ft_itoa(int n);
 int				generate_nbr(int min, int max);
 t_vector2_int_list
 				calc_line(t_vector2_int start, t_vector2_int end);
