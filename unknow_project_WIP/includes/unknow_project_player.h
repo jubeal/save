@@ -4,55 +4,14 @@
 
 #include "unknow_project_camera.h"
 
-typedef struct  s_knife
+typedef struct  s_weapon
 {
-	int			ammo;
-}               t_knife;
-
-typedef struct  s_pistol
-{
+	char		*name;
 	int			ammo;
 	int			mag_size;
-}               t_pistol;
-
-typedef struct  s_ar
-{
-	int			ammo;
-	int			mag_size;
-}               t_ar;
-
-typedef struct  s_rifle
-{
-	int			ammo;
-	int			mag_size;
-}               t_rifle;
-
-typedef struct  s_shotgun
-{
-	int			ammo;
-	int			mag_size;
-}               t_shotgun;
-
-typedef struct  s_weapons
-{
-	t_knife		knife;
-	t_pistol	pistol;
-	t_ar		ar;
-	t_rifle		rifle;
-	t_shotgun	shotgun;
-}               t_weapons;
-
-typedef struct  s_ammo
-{
-	int			pistol_ammo;
-	int			pistol_mags;
-	int			ar_ammo;
-	int			ar_mags;
-	int			rifle_ammo;
-	int			rifle_mags;
-	int			shotgun_ammo;
-	int			shotgun_mags;
-}               t_ammo;
+	int			total_ammo;
+	int			max_ammo;
+}               t_weapon;
 
 typedef struct  s_player
 {
@@ -61,13 +20,13 @@ typedef struct  s_player
 	int			hp;
 	int			armor;
 	float		speed;
-	t_weapons	weapons;
-	t_ammo		ammo;
+	t_weapon	weapons[4];
+	t_weapon	*current_weapon;
+
 }               t_player;
 
-t_player		create_t_player(t_camera *cam);
-t_player		*initialize_t_player(t_camera *cam);
-t_ammo			create_t_ammo(void);
-t_weapons		create_t_weapons(t_ammo ammo);
+t_player		create_t_player(t_camera *cam, t_mesh hitbox);
+t_player		*initialize_t_player(t_camera *cam, t_mesh hitbox);
+t_weapon		create_t_weapons(int index);
 
 #endif

@@ -15,6 +15,7 @@ t_vector2	*initialize_t_vector2(float p_x, float p_y)
 
 	if (!(result = (t_vector2 *)malloc(sizeof(t_vector2))))
 		return (NULL);
+	// printf("malloc t_vector2\n");
 	*result = create_t_vector2(p_x, p_y);
 	return (result);
 }
@@ -53,5 +54,5 @@ t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2)
 
 void		print_t_vector2(t_vector2 vector, char *str) // A SUPPRIMER
 {
-	printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
+	// printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
 }

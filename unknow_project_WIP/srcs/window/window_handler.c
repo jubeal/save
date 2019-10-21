@@ -26,6 +26,7 @@ t_window	*initialize_t_window(char *p_name, int p_size_x, int p_size_y)
 
 	if (!(win = (t_window *)malloc(sizeof(t_window))))
 		error_exit(-6, "Can't malloc a t_window");
+	// printf("malloc t_window\n");
 	win->window = SDL_CreateWindow(p_name, 0, 0, p_size_x, p_size_y,
 								SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	SDL_GetWindowSize(win->window, &win->size_x, &win->size_y);

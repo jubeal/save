@@ -22,6 +22,7 @@ t_face	*initialize_t_face(void)
 
 	if (!(result = (t_face *)malloc(sizeof(t_face))))
 		error_exit(-13, "Can't create a t_face");
+	// printf("malloc t_face\n");
 	*result = create_t_face();
 	return (result);
 }

@@ -6,6 +6,7 @@ t_item_list 	create_t_item_list()
 
 	if (!(list.item = (t_item *)malloc(sizeof(t_item) * PUSH_SIZE)))
 		error_exit(-18, "Can't malloc a t_item array");
+	// printf("malloc t_item_list.item\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -17,7 +18,7 @@ t_item_list 	*initialize_t_item_list()
 
 	if (!(list = (t_item_list *)malloc(sizeof(t_item_list))))
 		error_exit(-19, "Can't create a t_item_list array");
-
+	// printf("malloc t_item_list\n");
 	*list = create_t_item_list();
 
 	return (list);
@@ -33,6 +34,7 @@ void			t_item_list_push_back(t_item_list *dest, t_item to_add)
 		tmp = dest->item;
 		if (!(dest->item = (t_item *)malloc(sizeof(t_item) * (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_item array");
+		// printf("malloc t_item_list_push_back\n");
 		i = 0;
 		while (i < dest->size)
 		{
@@ -59,12 +61,14 @@ void			t_item_list_erase(t_item_list *dest, int index)
 void			delete_t_item_list(t_item_list dest)
 {
 	free(dest.item);
+	// printf("delete t_item_list\n");
 }
 
 void			free_t_item_list(t_item_list *dest)
 {
 	delete_t_item_list(*dest);
 	free(dest);
+	// printf("free t_item_list\n");
 }
 
 void			clean_t_item_list(t_item_list *dest)

@@ -10,9 +10,15 @@ t_keyboard	create_t_keyboard(void)
 	result.key[SDL_SCANCODE_D] = SDL_SCANCODE_D;
 	result.key[SDL_SCANCODE_F] = SDL_SCANCODE_F;
 	result.key[SDL_SCANCODE_I] = SDL_SCANCODE_I;
+	result.key[SDL_SCANCODE_R] = SDL_SCANCODE_R;
 	result.key[SDL_SCANCODE_LCTRL] = SDL_SCANCODE_LCTRL;
 	result.key[SDL_SCANCODE_LSHIFT] = SDL_SCANCODE_LSHIFT;
 	result.key[SDL_SCANCODE_SPACE] = SDL_SCANCODE_SPACE;
+	result.key[SDL_SCANCODE_1] = SDL_SCANCODE_1;
+	result.key[SDL_SCANCODE_2] = SDL_SCANCODE_2;
+	result.key[SDL_SCANCODE_3] = SDL_SCANCODE_3;
+	result.key[SDL_SCANCODE_4] = SDL_SCANCODE_4;
+	result.key[SDL_SCANCODE_B] = SDL_SCANCODE_B;
 	result.state = SDL_GetKeyboardState(NULL);
 	return (result);
 }
@@ -23,6 +29,7 @@ t_keyboard	*initialize_t_keyboard(void)
 
 	if (!(result = (t_keyboard *)malloc(sizeof(t_keyboard))))
 		return (NULL);
+	// printf("malloc t_keyboard\n");
 	*result = create_t_keyboard();
 	return (result);
 }

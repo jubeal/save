@@ -14,7 +14,10 @@ static char	*read_shader(const char *p_path)
 		if (ft_strlen(content) != 0)
 			ft_stradd(&content, "\n");
 		ft_stradd(&content, line);
+		free(line);
 	}
+	close(fd);
+	free(line);
 	return (content);
 }
 
@@ -62,6 +65,8 @@ GLuint		load_shaders(const char *p_vertex_file_path, const char *p_fragment_file
 	fragment_content = read_shader(p_fragment_file_path);
 	compile_shader(vertex_shader_id, vertex_content);
 	compile_shader(fragment_shader_id, fragment_content);
+	free(vertex_content);
+	free(fragment_content);
 	compute_program(program_id, vertex_shader_id, fragment_shader_id);
 	return (program_id);
 }

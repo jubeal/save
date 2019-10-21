@@ -16,6 +16,7 @@ t_user_engine	*initialize_t_user_engine()
 
 	if (!(result = (t_user_engine *)malloc(sizeof(t_user_engine))))
 		return (NULL);
+	// printf("malloc t_user_engine\n");
 
 	*result = create_t_user_engine();
 
@@ -26,23 +27,25 @@ void			delete_t_user_engine(t_user_engine dest)
 {
 	free(dest.mouse);
 	free(dest.keyboard);
+	// printf("delete t_user_engine\n");
 }
 
 void			free_t_user_engine(t_user_engine *dest)
 {
 	delete_t_user_engine(*dest);
 	free(dest);
+	// printf("free t_user_engine\n");
 }
 
-void			t_user_engine_handle_camera(t_user_engine *user_engine, t_camera *cam, t_physic_engine *physic_engine)
+void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam)
 {
-	t_mouse *mouse = user_engine->mouse;
-	t_keyboard *keyboard = user_engine->keyboard;
+	t_mouse *mouse = engine->user_engine->mouse;
+	t_keyboard *keyboard = engine->user_engine->keyboard;
 	get_t_mouse_info(mouse); // recuperation des informations mouse (position, et boutton utiliser)
 	if (mouse->button[MOUSE_LEFT] == BOOL_TRUE)
 		handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
 
-	handle_t_camera_mouvement_by_key(cam, keyboard, physic_engine); // deplacement cameras
+	handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
 
 	compute_t_camera(cam);
 }

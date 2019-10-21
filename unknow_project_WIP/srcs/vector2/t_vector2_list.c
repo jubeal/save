@@ -6,6 +6,7 @@ t_vector2_list	create_t_vector2_list(void)
 
 	if (!(list.vector = (t_vector2 *)malloc(sizeof(t_vector2) * PUSH_SIZE)))
 		error_exit(-12, "Can't malloc a t_vector2 array");
+	// printf("malloc t_vector2_list.vector\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -17,6 +18,7 @@ t_vector2_list	*initialize_t_vector2_list(void)
 
 	if (!(list = (t_vector2_list *)malloc(sizeof(t_vector2_list))))
 		error_exit(-13, "Can't create a t_vector2_list array");
+	// printf("malloc t_vector2_list\n");
 	*list = create_t_vector2_list();
 	return (list);
 }
@@ -32,6 +34,7 @@ void			t_vector2_list_push_back(t_vector2_list *dest, t_vector2 to_add)
 		if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) \
 									* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-14, "Can't realloc a t_vector2 array");
+		// printf("malloc t_vector2_list_push_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->vector[i] = tmp[i];
@@ -53,6 +56,7 @@ void			t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add)
 		if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) \
 									* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_vector2 array");
+		// printf("malloc t_vector2_list_add_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->vector[i] = tmp[i];
@@ -67,12 +71,14 @@ void			t_vector2_list_add_back(t_vector2_list *dest, t_vector2 *to_add)
 void			delete_t_vector2_list(t_vector2_list dest)
 {
 	free(dest.vector);
+	// printf("delete t_vector2_list\n");
 }
 
 void			free_t_vector2_list(t_vector2_list *dest)
 {
 	delete_t_vector2_list(*dest);
 	free(dest);
+	// printf("free t_vector2_list\n");
 }
 
 void			clean_t_vector2_list(t_vector2_list *dest)
@@ -111,6 +117,7 @@ void			t_vector2_list_resize(t_vector2_list *dest, int new_size)
 	tmp = dest->vector;
 	if (!(dest->vector = (t_vector2 *)malloc(sizeof(t_vector2) * (new_size))))
 		error_exit(-20, "Can't realloc a t_vector2 array");
+	// printf("malloc t_vector2_list_resize\n");
 	i = 0;
 	while (i < dest->size && i < new_size && i < old_size)
 	{

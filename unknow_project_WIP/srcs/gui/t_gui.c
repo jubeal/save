@@ -1,4 +1,7 @@
 #include "unknow_project.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 t_gui create_t_gui(float x, int y)
 {
@@ -8,23 +11,29 @@ t_gui create_t_gui(float x, int y)
 	idx = 0;
 	if (!(result.letter = (t_texture **)malloc(sizeof(t_texture*) * 95)))
 		error_exit(-29, "Can't malloc a t_surface");
+	// printf("malloc t_gui.letter\n");
 	while (idx <= 94)
 	{
 		if (!(result.letter[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
+		// printf("malloc t_gui.letter[idx]\n");
 		if (!(result.letter[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
+		// printf("malloc t_gui.letter[idx]->surface\n");
 		idx++;
 	}
 	idx = 0;
 	if (!(result.menu = (t_texture **)malloc(sizeof(t_texture*) * 15)))
 		error_exit(-29, "Can't malloc a t_surface");
+	// printf("malloc t_gui.menu\n");
 	while (idx <= 14)
 	{
 		if (!(result.menu[idx] = (t_texture *)malloc(sizeof(t_texture))))
 			error_exit(-29, "Can't malloc a t_surface");
+		// printf("malloc t_gui.menu[idx]\n");
 		if (!(result.menu[idx]->surface = (t_surface *)malloc(sizeof(t_surface))))
 			error_exit(-29, "Can't malloc a t_surface");
+		// printf("malloc t_gui.menu[idx]->surface\n");
 		idx++;
 	}
 	result.idx = 8;
@@ -42,6 +51,7 @@ t_gui *initialize_t_gui(float x, int y)
 	if (!(result = (t_gui *)malloc(sizeof(t_gui))))
 		error_exit(-13, "Can't create a t_gui");
 
+	// printf("malloc t_gui\n");
 	*result = create_t_gui(x, y);
 
 	return (result);
@@ -87,13 +97,21 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
-void	print_info_bar(t_camera *main_camera, t_gui *gui)
+void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 {
-	char	*str;
+	char		*str;
 
-	str = ft_itoa((int)(gui->perso.hp * 100));
-	print_letter(main_camera, gui, ft_strcat(str, " / 100"), create_t_rectangle(create_t_vector2(-0.1, -0.92), create_t_vector2(0.02, 0.07)));
-	str = ft_itoa(gui->perso.mun);
-	print_letter(main_camera, gui, ft_strcat(str, " / 30"), create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
+	str = ft_itoa(player->armor);
+	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.87), create_t_vector2(0.02, 0.07)));
+	free(str);
+	str = ft_itoa(player->hp);
+	print_letter(main_camera, gui, ft_strcat(str, "%"), create_t_rectangle(create_t_vector2(-0.025, -0.97), create_t_vector2(0.02, 0.07)));
+	free(str);
+
+	str = ft_itoa(player->current_weapon->ammo);
+	str = ft_strcat(str, " / ");
+	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
+
+	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);
 }

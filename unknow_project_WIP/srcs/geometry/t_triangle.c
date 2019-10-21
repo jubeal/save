@@ -16,6 +16,7 @@ t_triangle	*initialize_t_triangle(t_vector3 p_a, t_vector3 p_b, t_vector3 p_c)
 
 	if (!(result = (t_triangle *)malloc(sizeof(t_triangle))))
 		error_exit(-31, "Can't malloc a t_triangle");
+	// printf("malloc t_triangle\n");
 	*result = create_t_triangle(p_a, p_b, p_c);
 	return (result);
 }
@@ -56,7 +57,7 @@ t_triangle	t_triangle_add_vector3(t_triangle triangle, t_vector3 to_add)
 
 void		print_t_triangle(t_triangle p_triangle, char *triangle_name) // A SUPPRIMER
 {
-	printf("Triangle Name : %s\n", triangle_name);
+	// printf("Triangle Name : %s\n", triangle_name);
 	print_t_vector3(p_triangle.a, "A : ");
 	print_t_vector3(p_triangle.b, "B : ");
 	print_t_vector3(p_triangle.c, "C : ");

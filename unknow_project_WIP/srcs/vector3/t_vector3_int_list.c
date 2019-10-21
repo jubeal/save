@@ -7,6 +7,7 @@ t_vector3_int_list	create_t_vector3_int_list(void)
 	if (!(list.vector = (t_vector3_int *)malloc(sizeof(t_vector3_int) \
 														* PUSH_SIZE)))
 		error_exit(-15, "Can't malloc a t_vector3_int array");
+	// printf("malloc t_vector3_list_int_list.vector\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -18,6 +19,7 @@ t_vector3_int_list	*initialize_t_vector3_int_list(void)
 
 	if (!(list = (t_vector3_int_list *)malloc(sizeof(t_vector3_int_list))))
 		error_exit(-16, "Can't create a t_vector3_int_list array");
+	// printf("malloc t_vector3_list_int_list\n");
 	*list = create_t_vector3_int_list();
 	return (list);
 }
@@ -33,6 +35,7 @@ void				t_vector3_int_list_push_back(t_vector3_int_list *dest, t_vector3_int to_
 		if (!(dest->vector = (t_vector3_int *)malloc(sizeof(t_vector3_int) \
 											* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-17, "Can't realloc a t_vector3_int array");
+		// printf("malloc t_vector3_list_int_list_push_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->vector[i] = tmp[i];
@@ -54,6 +57,7 @@ void				t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_
 		if (!(dest->vector = (t_vector3_int *)malloc(sizeof(t_vector3_int) \
 											* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_vector3_int array");
+		// printf("malloc t_vector3_list_int_list_add_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->vector[i] = tmp[i];
@@ -69,12 +73,14 @@ void				t_vector3_int_list_add_back(t_vector3_int_list *dest, t_vector3_int *to_
 void				delete_t_vector3_int_list(t_vector3_int_list dest)
 {
 	free(dest.vector);
+	// printf("delete t_vector3_int_list\n");
 }
 
 void				free_t_vector3_int_list(t_vector3_int_list *dest)
 {
 	delete_t_vector3_int_list(*dest);
 	free(dest);
+	// printf("free t_vector3_int_list\n");
 }
 
 void				clean_t_vector3_int_list(t_vector3_int_list *dest)
@@ -114,6 +120,7 @@ void				t_vector3_int_list_resize(t_vector3_int_list *dest, int new_size)
 	if (!(dest->vector = (t_vector3_int *)malloc(sizeof(t_vector3_int) \
 															* (new_size))))
 		error_exit(-20, "Can't realloc a t_vector3_int array");
+	// printf("malloc t_vector3_int_list_resize\n");
 	i = 0;
 	while (i < dest->size && i < new_size && i < old_size)
 	{

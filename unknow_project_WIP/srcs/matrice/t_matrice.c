@@ -49,6 +49,7 @@ t_matrix	*initialize_t_matrix(void)
 
 	if (!(result = (t_matrix *)malloc(sizeof(t_matrix))))
 		error_exit(-13, "Can't create a t_matrix array");
+	// printf("malloc t_matrix\n");
 	*result = create_t_matrix();
 	return (result);
 }
@@ -173,12 +174,12 @@ void		print_t_matrix(t_matrix *m)
 	int	i;
 
 	i = 0;
-	printf("--------------------------------------------------------------\n");
+	// printf("--------------------------------------------------------------\n");
 	while (i < 4)
 	{
-		printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i],\
+		// printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i],\
 				m->value[1][i], m->value[2][i], m->value[3][i]);
 		i++;
 	}
-	printf("--------------------------------------------------------------\n");
+	// printf("--------------------------------------------------------------\n");
 }

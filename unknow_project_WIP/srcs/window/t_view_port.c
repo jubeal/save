@@ -21,6 +21,7 @@ t_view_port	*initialize_t_view_port(t_window *p_window, t_vector2_int p_pos, t_v
 
 	if (!(result = (t_view_port *)malloc(sizeof(t_view_port))))
 		return (NULL);
+	// printf("malloc t_view_port\n");
 	*result = create_t_view_port(p_window, p_pos, p_size);
 	return (result);
 }
@@ -56,6 +57,7 @@ void		t_view_port_change_window(t_view_port *view, t_window *p_window)
 	if (!(view->depth_buffer = (float *)malloc(sizeof(float) \
 									* p_window->size_x * p_window->size_y)))
 		error_exit(-456, "Can't malloc a float array properly");
+	// printf("malloc t_view_port_change_window\n");
 	move_t_view_port(view, view->pos);
 	resize_t_view_port(view, view->size);
 }

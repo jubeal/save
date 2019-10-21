@@ -12,7 +12,7 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 	int		i;
 	t_face	tmp_face;
 
-	result = create_t_mesh(pos, NULL);
+	result = create_t_mesh(pos);
 	t_mesh_activate_gravity(&result, gravity);
 	tmp_face = create_t_face();
 
@@ -79,7 +79,9 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 				}
 			}
 		}
+		free(line);
 	}
+	free(line);
 	t_mesh_compute_normals(&result);
 	close(fd);
 	t_mesh_compute_bubble_box(&result);

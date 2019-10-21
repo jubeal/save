@@ -35,12 +35,12 @@ typedef struct  s_gui
 
 t_gui           create_t_gui(float x, int y);
 t_gui           *initialize_t_gui(float x, int y);
-void            drawing_front_hp(t_camera *main_camera, t_gui *gui);
-void            drawing_front_mun(t_camera *main_camera, t_gui *gui, t_texture *texture);
+void            drawing_front_hp(t_camera *main_camera, t_engine *engine);
+void            drawing_front_mun(t_camera *main_camera, t_gui *gui, t_texture **texture, t_player *player);
 void            draw_minimap(t_camera *main_camera, t_engine *engine, t_window *win);
 void            load_letter(t_gui *gui, char *str, int idx);
 void            set_t_gui_texte(t_gui *gui);
-void            print_info_bar(t_camera *main_camera, t_gui *gui);
+void            print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui);
 void            load_menu(t_gui *gui);
 void            t_engine_handle_event(t_camera *main_camera, t_gui *gui, t_engine *engine);
 void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_engine, int *play);

@@ -9,3 +9,16 @@ int		ft_tablen(char **tab)
 		i++;
 	return (i);
 }
+
+void	ft_freetab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_tablen(tab))
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}

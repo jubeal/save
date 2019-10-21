@@ -6,6 +6,7 @@ t_texture_list	create_t_texture_list(void)
 
 	if (!(list.texture = (t_texture *)malloc(sizeof(t_texture) * PUSH_SIZE)))
 		error_exit(-25, "Can't malloc a t_texture array");
+	// printf("malloc t_texture_list.texture\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -17,6 +18,7 @@ t_texture_list	*initialize_t_texture_list(void)
 
 	if (!(list = (t_texture_list *)malloc(sizeof(t_texture_list))))
 		error_exit(-26, "Can't create a t_texture_list array");
+	// printf("malloc t_texture_list\n");
 	*list = create_t_texture_list();
 	return (list);
 }
@@ -32,6 +34,7 @@ void			t_texture_list_push_back(t_texture_list *dest, t_texture to_add)
 		if (!(dest->texture = (t_texture *)malloc(sizeof(t_texture) \
 									* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-27, "Can't realloc a t_texture array");
+		// printf("malloc t_texture_list_push_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->texture[i] = tmp[i];
@@ -53,6 +56,7 @@ void			t_texture_list_add_back(t_texture_list *dest, t_texture *to_add)
 		if (!(dest->texture = (t_texture *)malloc(sizeof(t_texture) \
 									* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_texture array");
+		// printf("malloc t_texture_list_add_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->texture[i] = tmp[i];
@@ -67,12 +71,14 @@ void			t_texture_list_add_back(t_texture_list *dest, t_texture *to_add)
 void			delete_t_texture_list(t_texture_list dest)
 {
 	free(dest.texture);
+	// printf("delete t_texture_list\n");
 }
 
 void			free_t_texture_list(t_texture_list *dest)
 {
 	delete_t_texture_list(*dest);
 	free(dest);
+	// printf("free t_texture_list\n");
 }
 
 void			clean_t_texture_list(t_texture_list *dest)

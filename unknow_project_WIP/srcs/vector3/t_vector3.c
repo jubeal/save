@@ -16,6 +16,7 @@ t_vector3	*initialize_t_vector3(float p_x, float p_y, float p_z)
 
 	if (!(result = (t_vector3 *)malloc(sizeof(t_vector3))))
 		return (NULL);
+	// printf("malloc t_vector3\n");
 	*result = create_t_vector3(p_x, p_y, p_z);
 	return (result);
 }
@@ -117,5 +118,5 @@ float		t_vector3_length(t_vector3 a)
 
 void		print_t_vector3(t_vector3 vector, char *str) // A SUPPRIMER
 {
-	printf("%s : %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
+	// printf("%s : %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
 }

@@ -8,6 +8,7 @@ char		*ft_strnew(int size)
 	ret = NULL;
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
+	// printf("malloc strnew\n");
 	i = 0;
 	while (i <= size)
 	{

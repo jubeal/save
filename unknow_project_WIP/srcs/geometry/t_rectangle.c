@@ -15,6 +15,7 @@ t_rectangle	*initialize_t_rectangle(t_vector2 p_pos, t_vector2 p_size)
 
 	if (!(result = (t_rectangle *)malloc(sizeof(t_rectangle))))
 		error_exit(-31, "Can't malloc a t_rectangle");
+	// printf("malloc t_rectangle\n");
 	*result = create_t_rectangle(p_pos, p_size);
 	return (result);
 }

@@ -15,6 +15,7 @@ t_vector2_int	*initialize_t_vector2_int(int p_x, int p_y)
 
 	if (!(result = (t_vector2_int *)malloc(sizeof(t_vector2_int))))
 		return (NULL);
+	// printf("malloc t_vector2_int\n");
 	*result = create_t_vector2_int(p_x, p_y);
 	return (result);
 }
@@ -45,5 +46,5 @@ void			set_t_vector2_int(t_vector2_int *src, int p_x, int p_y)
 
 void			print_t_vector2_int(t_vector2_int vector, char *str) //A SUPPRIMER
 {
-	printf("%s%d / %d\n", str, vector.x, vector.y);
+	// printf("%s%d / %d\n", str, vector.x, vector.y);
 }

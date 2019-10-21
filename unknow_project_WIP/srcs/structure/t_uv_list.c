@@ -6,6 +6,7 @@ t_uv_list	create_t_uv_list(void)
 
 	if (!(result.uvs = (t_uv *)malloc(sizeof(t_uv) * PUSH_SIZE)))
 		error_exit(-55, "c pas bien");
+	// printf("malloc t_uv_list.uvs\n");
 	result.size = 0;
 	result.max_size = PUSH_SIZE;
 	return (result);
@@ -17,6 +18,7 @@ t_uv_list	*initialize_t_uv_list(void)
 
 	if (!(result = (t_uv_list *)malloc(sizeof(t_uv_list))))
 		return (NULL);
+	// printf("malloc t_uv_list\n");
 	*result = create_t_uv_list();
 	return (result);
 }
@@ -32,6 +34,7 @@ void		t_uv_list_push_back(t_uv_list *dest, t_uv to_add)
 		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv) \
 							* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-14, "Can't realloc a t_uv array");
+		// printf("malloc t_uv_list_push_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->uvs[i] = tmp[i];
@@ -53,6 +56,7 @@ void		t_uv_list_add_back(t_uv_list *dest, t_uv *to_add)
 		if (!(dest->uvs = (t_uv *)malloc(sizeof(t_uv) \
 							* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-14, "Can't realloc a t_uv array");
+		// printf("malloc t_uv_list_add_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->uvs[i] = tmp[i];

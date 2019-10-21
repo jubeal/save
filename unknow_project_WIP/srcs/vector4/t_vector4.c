@@ -26,5 +26,5 @@ t_vector4	*initialize_t_vector4(float p_x, float p_y, float p_z, float p_w)
 
 void print_t_vector4(t_vector4 vector, char *str)
 {
-	printf("%s%0.4f / %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z, vector.w);
+	// printf("%s%0.4f / %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z, vector.w);
 }

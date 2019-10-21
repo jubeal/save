@@ -40,5 +40,5 @@ void	ft_putnbr(int n)
 
 void	endl()
 {
-	printf("\n");
+	// printf("\n");
 }

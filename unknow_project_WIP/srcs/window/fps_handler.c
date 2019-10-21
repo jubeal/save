@@ -2,19 +2,17 @@
 
 void		check_frame(void)
 {
-	static int		nb_frame;
-	static int		beginsecond;
+	static int		nb_frame = 0;
+	static int		beginsecond = 0;
 	int				frame_actual;
 	static Uint32	framestart;
 
-	nb_frame = 0;
-	beginsecond = 0;
 	frame_actual = SDL_GetTicks();
 	if (beginsecond == 0)
 		beginsecond = frame_actual;
 	if (frame_actual - beginsecond > 1000)
 	{
-		printf("nb_frame = %d\n", nb_frame);
+		// printf("nb_frame = %d\n", nb_frame);
 		nb_frame = 0;
 		beginsecond = 0;
 	}

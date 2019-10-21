@@ -14,7 +14,7 @@
 # define BUFF_SIZE 2500
 
 # define FPS 60000
-# define PUSH_SIZE 2000
+# define PUSH_SIZE 200000
 
 # define MOUSE_BUTTON 3
 # define MOUSE_NULL -1

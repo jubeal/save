@@ -14,6 +14,7 @@ int				ft_strchr(char *src, char d);
 int				get_next_line(const int fd, char **line);
 char			**ft_strsplit(char const *s, char c);
 int				ft_tablen(char **tab);
+void            ft_freetab(char **tab);
 void 			error_exit(int error, char *message);
 void			ft_bzero(void *src, size_t nb_bytes);
 void			endl();
@@ -22,6 +23,7 @@ int				ft_strcmp(char *s1, char *s2);
 int				ft_atoi(const char *str);
 int				ft_floor(float source);
 float			ft_abs_float(float src);
+char		    *ft_ftoa(float num);
 
 int				min(int a, int b);
 int				max(int a, int b);
@@ -31,5 +33,7 @@ float			float_max(float a, float b);
 int				get_next_line(const int fd, char **line);
 char			*ft_strcpy(char *dest, const char *str);
 char			*ft_strcat(char *dest, const char *src);
+char		    *ft_strjoinf(char *s1, char *s2, int c);
+int		        ft_strlength(char *s);
 
 #endif

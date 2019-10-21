@@ -115,6 +115,7 @@ void		draw_t_mesh(t_camera *p_cam, t_mesh *mesh)
 	t_face	face;
 
 	i = -1;
+	// time_exe("test1");
 	if (mesh->is_visible == BOOL_FALSE)
 		return ;
 	while (++i < mesh->faces->size)
@@ -122,4 +123,6 @@ void		draw_t_mesh(t_camera *p_cam, t_mesh *mesh)
 		face = t_face_list_at(mesh->faces, i);
 		how_many_points_clipped(mesh, face, p_cam);
 	}
+	// time_exe("test2");
+	// print_time();
 }

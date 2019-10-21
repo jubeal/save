@@ -19,6 +19,7 @@ t_mouse	*initialize_t_mouse(void)
 
 	if (!(result = (t_mouse *)malloc(sizeof(t_mouse))))
 		return (NULL);
+	// printf("malloc t_mouse\n");
 	*result = create_t_mouse();
 	return (result);
 }
@@ -65,17 +66,17 @@ void	print_t_mouse(t_mouse *mouse) // affiche les infos de la souris --- a SUPPR
 
 	i = 0;
 	find = 0;
-	printf("[ %d][ %d ] - [ %d ][ %d ]", mouse->pos.x, mouse->pos.y, mouse->rel_pos.x, mouse->rel_pos.y);
+	// printf("[ %d][ %d ] - [ %d ][ %d ]", mouse->pos.x, mouse->pos.y, mouse->rel_pos.x, mouse->rel_pos.y);
 	while (i < MOUSE_BUTTON)
 	{
 		if (mouse->button[i] == BOOL_TRUE)
 		{
-			printf("[%s]", button_text[i]);
+			// printf("[%s]", button_text[i]);
 			find++;
 		}
 		i++;
 	}
 	if (find == 0)
 		printf("[NULL]");
-	printf("\n");
+	// printf("\n");
 }

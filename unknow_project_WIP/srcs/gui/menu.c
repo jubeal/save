@@ -4,13 +4,13 @@ void            t_user_engine_handle_menu(t_camera *main_camera, t_gui *gui, t_u
 {
     if (*play == 2)
         main_menu(main_camera, gui, user_engine, play);
-    if (*play == 3)
+    else if (*play == 3)
         option_menu(main_camera, gui, user_engine, play);
-    if (*play == 4)
+    else if (*play == 4)
         setting_menu(main_camera, gui, user_engine, play);
-    if (*play == 5)
+    else if (*play == 5)
         difficulty_menu(main_camera, gui, user_engine, play);
-    if (*play == 6)
+    else if (*play == 6)
         sens_menu(main_camera, gui, user_engine, play);
 }
 
@@ -122,6 +122,7 @@ void        setting_menu(t_camera *main_camera, t_gui *gui, t_user_engine *user_
 {
     t_mouse *mouse = user_engine->mouse;
     t_keyboard *keyboard = user_engine->keyboard;
+
 	get_t_mouse_info(mouse);
     if (gui->key_press != 2)
     {

@@ -5,7 +5,7 @@ static int              ft_size(long nb)
         int             size;
 
         size = 0;
-        if (nb < 0)
+        if (nb <= 0)
         {
                 nb *= -1;
                 size++;
@@ -20,27 +20,27 @@ static int              ft_size(long nb)
 
 char                    *ft_itoa(int n)
 {
-        char	*array;
-        int		size;
-        long	nb;
+        char    *array;
+        int             size;
+        long    nb;
 
         nb = n;
         size = ft_size(nb);
         if (!(array = (char*)malloc(sizeof(char) * size + 1)))
-            return (NULL);
+                return (NULL);
         array[size--] = '\0';
         if (nb == 0)
                 array[0] = '0';
         if (nb < 0)
         {
-			array[0] = '-';
-			nb *= -1;
+                array[0] = '-';
+                nb *= -1;
         }
         while (nb > 0)
         {
-        	array[size] = (nb % 10) + '0';
-            nb /= 10;
-        	size--;
+                array[size] = (nb % 10) + '0';
+                nb /= 10;
+                size--;
         }
         return (array);
 }
@@ -164,21 +164,67 @@ int				is_point_on_triangle(t_triangle a, t_vector3 point)
 		return (BOOL_FALSE);
 }
 
+// int				is_point_on_triangle(t_triangle a, t_vector3 point)
+// {
+// 	t_vector3 normale;
+// 	t_vector3 w;
+// 	t_vector3 u;
+// 	t_vector3 v;
+// 	float uv;
+// 	float wv;
+// 	float vv;
+// 	float wu;
+// 	float uu;
+// 	float s;
+// 	float t;
+
+// 	normale = cross_t_vector3(substract_vector3_to_vector3(a.b, a.a), substract_vector3_to_vector3(a.c, a.a));
+// 	// A		: 9.9995 / 9.9995 / 5.0000
+// 	// B		: 9.9995 / 5.0000 / 5.0000
+// 	// C		: 5.0000 / 9.9995 / 5.0000
+// 	// Normale : -0.0000 / -0.0000 / -24.9950
+
+// 	if (calc_distance_to_plane(normale, a.a, point) != 0)
+// 		return (BOOL_FALSE);
+
+// 	//point = 5 / 15 / 5
+
+// 	w = substract_vector3_to_vector3(point, a.a);
+// 	u = substract_vector3_to_vector3(a.b, a.a);
+// 	v = substract_vector3_to_vector3(a.c, a.a);
+
+// 	uv = dot_t_vector3(u, v);
+// 	wv = dot_t_vector3(w, v);
+// 	vv = dot_t_vector3(v, v);
+// 	wu = dot_t_vector3(w, u);
+// 	uu = dot_t_vector3(u, u);
+
+// 	s = ((uv * wv) - (vv * wu)) / ((uv * uv) - (uu * vv));
+// 	t = ((uv * wu) - (uu * wv)) / ((uv * uv) - (uu * vv));
+// 	// printf("s = %f\n", s);
+// 	// printf("t = %f\n", t);
+// 	// printf("s + t = %f\n", s + t);
+// 	if ((s >= 0.0 || t >= 0.0) && s + t <= 1.0)
+// 		return (BOOL_TRUE);
+
+// 	return (BOOL_FALSE);
+// }
+
 int				intersect_segment_by_segment(t_vector3 a, t_vector3 b, t_vector3 c, t_vector3 d)
 {
-	t_vector3	u;
-	t_vector3	v;
-	t_vector3	w;
+	t_vector3 u;
+	t_vector3 v;
+	t_vector3 w;
 
-	float	uv;
-	float	wv;
-	float	vv;
-	float	wu;
-	float	uu;
+	float uv;
+	float wv;
+	float vv;
+	float wu;
+	float uu;
 
-	float	denominator;
-	float	s;
-	float	t;
+	float denominator;
+	float s;
+	float t;
 
 	u = substract_vector3_to_vector3(b, a);
 	v = substract_vector3_to_vector3(d, c);
@@ -356,9 +402,9 @@ int				is_same_sign(float a, float b)
 
 int				is_triangle_cut_triangle(t_triangle p_a, t_triangle p_b)
 {
-	int		cut_ab;
-	int		cut_ac;
-	int		cut_bc;
+	int cut_ab;
+	int cut_ac;
+	int cut_bc;
 
 	cut_ab = intersect_segment_by_segment(p_a.a, p_a.b, p_b.a, p_b.b);
 	cut_ac = intersect_segment_by_segment(p_a.a, p_a.c, p_b.a, p_b.b);

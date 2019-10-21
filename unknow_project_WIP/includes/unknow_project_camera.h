@@ -49,6 +49,9 @@ typedef struct	s_camera
 	float		near;
 	float		far;
 
+	int			crounch;
+	int			f_press;
+
 }				t_camera;
 
 t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist);

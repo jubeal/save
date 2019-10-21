@@ -47,8 +47,28 @@ int			ft_strcmp(char *s1, char *s2)
 
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])
-	{
 		i++;
-	}
 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
+}
+
+char		*ft_strjoinf(char *s1, char *s2, int c)
+{
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	if (c == 1 || c == 3)
+		free(s1);
+	if (c == 2 || c == 3)
+		free(s2);
+	return (str);
+}
+
+int			ft_strlength(char *s)
+{
+	int ret;
+
+	ret = 0;
+	while (s[ret])
+		ret++;
+	return (ret);
 }

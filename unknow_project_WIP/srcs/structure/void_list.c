@@ -6,6 +6,7 @@ t_void_list	create_t_void_list(void)
 
 	if (!(list.data = (void **)malloc(sizeof(void *) * PUSH_SIZE)))
 		error_exit(-15, "Can't malloc a void * array");
+	// printf("malloc t_void_list.data\n");
 	list.size = 0;
 	list.max_size = PUSH_SIZE;
 	return (list);
@@ -17,6 +18,7 @@ t_void_list	*initialize_t_void_list(void)
 
 	if (!(list = (t_void_list *)malloc(sizeof(t_void_list))))
 		error_exit(-16, "Can't create a t_void_list array");
+	// printf("malloc t_void_list\n");
 	*list = create_t_void_list();
 	return (list);
 }
@@ -48,6 +50,7 @@ void		t_void_list_push_back(t_void_list *dest, void *to_add)
 		if (!(dest->data = (void **)malloc(sizeof(void *) \
 							* (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-17, "Can't realloc a void * array");
+		// printf("malloc t_void_list_push_back\n");
 		i = -1;
 		while (++i < dest->size)
 			dest->data[i] = tmp[i];
@@ -63,12 +66,14 @@ void		delete_t_void_list(t_void_list dest)
 	free(dest.data);
 	dest.data = NULL;
 	dest.size = 0;
+	// printf("delete t_void_list\n");
 }
 
 void		free_t_void_list(t_void_list *dest)
 {
 	delete_t_void_list(*dest);
 	free(dest);
+	// printf("free t_void_list\n");
 }
 
 void		clean_t_void_list(t_void_list *dest)

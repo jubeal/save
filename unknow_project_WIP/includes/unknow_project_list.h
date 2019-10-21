@@ -20,8 +20,9 @@ void			free_t_mesh_list(t_mesh_list *dest);
 void			clean_t_mesh_list(t_mesh_list *dest);
 t_mesh			t_mesh_list_at(t_mesh_list *dest, int index);
 t_mesh			*t_mesh_list_get(t_mesh_list *dest, int index);
-t_mesh_list		read_map_file(char *path);
+t_mesh_list		*read_map_file(char *path);
 int				t_mesh_list_get_index(t_mesh_list *dest, t_mesh *mesh);
+void    		save_map(t_mesh_list *to_save, int wich);
 
 typedef struct	s_camera_list
 {
