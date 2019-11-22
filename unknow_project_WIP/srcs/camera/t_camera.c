@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	create_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera result;
 
@@ -18,12 +18,13 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	result.slowing = 1.0f; // ralentissement pour le recul
 	result.crounch = 0;
 	result.f_press = 0;
+	result.r_press = 0;
 
 	result.model = create_t_matrix(); // creation de la matrice d'identite permettant de faire les calculs matriciel par la suite
 	t_camera_look_at(&result); //calcul de l'angle de la camera
 	result.view = t_camera_compute_view(&result); //calcul de la matrice de vue
 	result.projection = compute_projection_matrix(&result); //calcul de la matrice de projection
-	result.sun_direction = normalize_t_vector3(create_t_vector3(0.2, -1, -0.4)); // direction de la lumiere
+	result.sun_direction = normalize_t_vector4(create_t_vector4(0.2, -1, -0.4)); // direction de la lumiere
 	result.triangle_color_list = create_t_triangle_list(); // list des triangles
 	result.color_list = create_t_color_list(); //list des couleurs
 
@@ -34,7 +35,7 @@ t_camera	create_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vecto
 	return (result);
 }
 
-t_camera	*initialize_t_camera(t_window *window, t_vector3 p_pos, float p_fov, t_vector2 p_dist)
+t_camera	*initialize_t_camera(t_window *window, t_vector4 p_pos, float p_fov, t_vector2 p_dist)
 {
 	t_camera *result;
 
@@ -83,12 +84,12 @@ void		free_t_cam(t_camera *dest)
 	// printf("free t_camera\n");
 }
 
-void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'angle de vue de la camera (forward, right, up)
+void		t_camera_look_at_point(t_camera *cam, t_vector4 target) // calcul de l'angle de vue de la camera (forward, right, up)
 {
 	if (target.x == cam->pos.x && target.y == cam->pos.y && target.z == cam->pos.z)
 		return ;
 
-	t_vector3 result = normalize_t_vector3(substract_vector3_to_vector3(cam->pos, target));
+	t_vector4 result = normalize_t_vector4(substract_vector4_to_vector4(cam->pos, target));
 
 	cam->yaw = radius_to_degree(atan2(result.z, -result.x)) - 90;
 	cam->pitch = radius_to_degree(atan2(result.y, sqrt(result.x * result.x + result.z * result.z)));
@@ -99,17 +100,17 @@ void		t_camera_look_at_point(t_camera *cam, t_vector3 target) // calcul de l'ang
 
 void		t_camera_look_at(t_camera *cam) // calcul de l'angle de vue de la camera (forward, right, up)
 {
-	t_vector3 zaxis = normalize_t_vector3(create_t_vector3(cos(degree_to_radius(cam->pitch)) * sin(degree_to_radius(cam->yaw)),
+	t_vector4 zaxis = normalize_t_vector4(create_t_vector4(cos(degree_to_radius(cam->pitch)) * sin(degree_to_radius(cam->yaw)),
 						sin(degree_to_radius(cam->pitch)),
 						cos(degree_to_radius(cam->pitch)) * cos(degree_to_radius(cam->yaw))));
-	t_vector3 xaxis = normalize_t_vector3(create_t_vector3(sin(degree_to_radius(cam->yaw) - 3.14f / 2.0f),
+	t_vector4 xaxis = normalize_t_vector4(create_t_vector4(sin(degree_to_radius(cam->yaw) - 3.14f / 2.0f),
 						0,
 						cos(degree_to_radius(cam->yaw) - 3.14f / 2.0f)));
-	t_vector3 yaxis = normalize_t_vector3(cross_t_vector3(xaxis, zaxis));
+	t_vector4 yaxis = normalize_t_vector4(cross_t_vector4(xaxis, zaxis));
 
-	cam->forward = inv_t_vector3(zaxis);
-	cam->right = xaxis;
-	cam->up = inv_t_vector3(yaxis);
+	cam->forward = inv_t_vector4(zaxis);
+	cam->right = inv_t_vector4(xaxis);
+	cam->up = yaxis;
 }
 
 t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
@@ -121,17 +122,17 @@ t_matrix	t_camera_compute_view(t_camera *cam) //calcul de la matrice de vue
 	result.value[0][0] = cam->right.x;
 	result.value[1][0] = cam->right.y;
 	result.value[2][0] = cam->right.z;
-	result.value[3][0] = - (dot_t_vector3(cam->right, cam->pos));
+	result.value[3][0] = -(dot_t_vector4(cam->right, cam->pos));
 
 	result.value[0][1] = cam->up.x;
 	result.value[1][1] = cam->up.y;
 	result.value[2][1] = cam->up.z;
-	result.value[3][1] = - (dot_t_vector3(cam->up, cam->pos));
+	result.value[3][1] = -(dot_t_vector4(cam->up, cam->pos));
 
 	result.value[0][2] = cam->forward.x;
 	result.value[1][2] = cam->forward.y;
 	result.value[2][2] = cam->forward.z;
-	result.value[3][2] = -(dot_t_vector3(cam->forward, cam->pos));
+	result.value[3][2] = -(dot_t_vector4(cam->forward, cam->pos));
 
 	return (result);
 }
@@ -159,9 +160,9 @@ t_matrix	compute_projection_matrix(t_camera *p_cam) //calcul de la matrice de pr
 	t = 1.0 / (tan(degree_to_radius(p_cam->fov / 2.0))) / (4.0 / 3.0); // changer le (4/3) en (16/9) va changer le ratio de l'ecran, changeant l'apparence des cubes a l'ecran
 	result.value[0][0] = t;
 	result.value[1][1] = r;
-	result.value[2][2] = -(f) / (f - n);
-	result.value[2][3] = -1.0;
-	result.value[3][2] = -(2.0 * f * n) / (f - n);
+	result.value[2][2] = f / (f - n);
+	result.value[2][3] = 1.0;
+	result.value[3][2] = -(2 * f * n) / (f - n);
 	return (result);
 }
 
@@ -171,22 +172,20 @@ void		compute_t_camera(t_camera *cam)
 	cam->projection = compute_projection_matrix(cam);
 }
 
-t_vector3	apply_t_camera(t_vector3 *src, t_matrix *mat) // applique la position de la camera
+t_vector4	apply_t_camera(t_vector4 *src, t_matrix *mat) // applique la position de la camera
 {
-	t_vector3	result; // x -> coord a l'ecran en x de ce point / y -> coord a l'ecran en y de ce point / z -> distance reelle entre ce point et l'oeil de la camera
-	float		delta;
+	t_vector4	result; // x -> coord a l'ecran en x de ce point / y -> coord a l'ecran en y de ce point / z -> distance reelle entre ce point et l'oeil de la camera
 
 	result.x = src->x * mat->value[0][0] + src->y * mat->value[1][0] + src->z * mat->value[2][0] + mat->value[3][0];
 	result.y = src->x * mat->value[0][1] + src->y * mat->value[1][1] + src->z * mat->value[2][1] + mat->value[3][1];
 	result.z = src->x * mat->value[0][2] + src->y * mat->value[1][2] + src->z * mat->value[2][2] + mat->value[3][2];
-	delta = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
-	if (delta != 0)
+	result.w = src->x * mat->value[0][3] + src->y * mat->value[1][3] + src->z * mat->value[2][3] + mat->value[3][3];
+	if (result.w != 0)
 	{
-		result.x /= delta;
-		result.y /= delta;
-		result.z /= -delta;
+		result.x /= result.w;
+		result.y /= result.w;
+		result.z /= -result.w;
 	}
-	//result.z = calc_dist_vector3_to_vector3(create_t_vector3(0, 0, 0), *src);
 	return (result);
 }
 
@@ -197,78 +196,92 @@ void		t_camera_change_view(t_camera *cam, float delta_pitch, float delta_yaw)
 	t_camera_look_at(cam);
 }
 
-void		move_camera(t_camera *camera, t_vector3 mouvement, t_engine *engine, float j)
+void		move_camera(t_camera *camera, t_vector4 mouvement, t_engine *engine, float j)
 {
-	if (can_move(camera->body, engine) == BOOL_TRUE)
+	if (camera->body->no_hitbox == 1 && camera->body->is_visible == 0)
+		t_mesh_move(camera->body, camera->body->force);
+	else if (can_move(camera->body, engine) == BOOL_TRUE)
 		t_mesh_move(camera->body, camera->body->force);
 	t_physic_engine_apply_force(engine);
-	camera->pos = add_vector3_to_vector3(camera->pos, camera->body->force);
-	camera->pos = add_vector3_to_vector3(camera->body->pos,
-					create_t_vector3(0.15, 0.45 - j, 0.15));
+	camera->pos = add_vector4_to_vector4(camera->pos, camera->body->force);
+	camera->pos = add_vector4_to_vector4(camera->body->pos,
+					create_t_vector4(0.15, 0.45 - j, 0.15));
+	engine->user_engine->player->hitbox.pos = camera->pos;
 }
 
 void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard, t_engine *engine) // calcul du mouvement de la cameraera au clavier
 {
-	static t_mesh	*door = NULL;
 	t_mesh			*target;
-	t_vector3		tmp;
-	t_vector3		mouvement;
-	t_vector3		save;
+	t_vector4		tmp;
+	t_vector4		mouvement;
+	t_vector4		save;
 	float			y;
 	float			j;
+	float			z;
 	int				i;
 	int				k;
 	int				l;
 
 	j = 0.0;
 	i = 0;
-	mouvement = create_t_vector3(0, 0, 0);
-	save = create_t_vector3(0, 0, 0);
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
+	z = 0.0;
+	mouvement = create_t_vector4(0, 0, 0);
+	save = create_t_vector4(0, 0, 0);
+	if (engine->user_engine->player->camera->body->kinetic == 0.0f)
 	{
-		camera->body->force.y = 0.05;
+		camera->body->force = create_t_vector4(0.0, 0.0, 0.0);
+		z = 0.1;
+	}
+	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && engine->user_engine->player->fuel > 0)
+	{
+		camera->body->force.y = 0.04;
+		engine->user_engine->player->fuel--;
+	}
+	else if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_SPACE]) == 1 && camera->body->force.y == 0)
+	{
+		camera->body->force.y = 0.04;
 	}
 	y = camera->body->force.y;
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LSHIFT]) == 1 && camera->body->force.y == 0)
-		tmp = create_t_vector3(camera->speed * camera->running, 0.0, camera->speed * camera->running);
+		tmp = create_t_vector4(camera->speed * camera->running, z, camera->speed * camera->running);
 	else
-		tmp = create_t_vector3(camera->speed, 0.0, camera->speed);
+		tmp = create_t_vector4(camera->speed, z, camera->speed);
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_S]) == 1)
 	{
-		tmp = create_t_vector3(camera->speed / camera->slowing, 0.0, camera->speed / camera->slowing);
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(-1.0, 0.0, -1.0))), tmp), mouvement);
-		save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+		tmp = create_t_vector4(camera->speed / camera->slowing, z, camera->speed / camera->slowing);
+		camera->body->force = add_vector4_to_vector4(mult_vector4_by_vector4(normalize_t_vector4(mult_vector4_by_vector4(camera->forward, create_t_vector4(-1.0, -1.0, -1.0))), tmp), mouvement);
+		save = create_t_vector4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_W]) == 1)
 	{
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(normalize_t_vector3(mult_vector3_by_vector3(camera->forward, create_t_vector3(1.0, 0.0, 1.0))), tmp), mouvement);
+		camera->body->force = add_vector4_to_vector4(mult_vector4_by_vector4(normalize_t_vector4(mult_vector4_by_vector4(camera->forward, create_t_vector4(1.0, 1.0, 1.0))), tmp), mouvement);
 		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
+			save = add_vector4_to_vector4(divide_vector4_by_float(camera->body->force, 2), divide_vector4_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_D]) == 1)
 	{
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(inv_t_vector3(camera->right), tmp), mouvement);
+		camera->body->force = add_vector4_to_vector4(mult_vector4_by_vector4(camera->right, tmp), mouvement);
 		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
+			save = add_vector4_to_vector4(divide_vector4_by_float(camera->body->force, 2), divide_vector4_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 }
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_A]) == 1)
 	{
-		camera->body->force = add_vector3_to_vector3(mult_vector3_by_vector3(camera->right, tmp), mouvement);
+		camera->body->force = add_vector4_to_vector4(mult_vector4_by_vector4(inv_t_vector4(camera->right), tmp), mouvement);
 		if (save.x != 0 || save.y != 0 || save.z != 0)
-			save = add_vector3_to_vector3(divide_vector3_by_float(camera->body->force, 2), divide_vector3_by_float(save, 2));
+			save = add_vector4_to_vector4(divide_vector4_by_float(camera->body->force, 2), divide_vector4_by_float(save, 2));
 		else
-			save = create_t_vector3(camera->body->force.x, 0, camera->body->force.z);
+			save = create_t_vector4(camera->body->force.x, camera->body->force.y, camera->body->force.z);
 	}
 	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_LCTRL]) == 1)
 	{
 		j = 0.2;
 		if (camera->crounch == 0)
 		{
-			t_mesh_resize(camera->body, create_t_vector3(0.0, -0.2, 0.0));
+			t_mesh_resize(camera->body, create_t_vector4(0.0, -0.2, 0.0));
 			camera->crounch = 1;
 		}
 	}
@@ -279,7 +292,7 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		while (i < engine->physic_engine->mesh_list->size)
 		{
 			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center))
+			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector4_to_vector4(camera->body->center, target->center))
 			{
 				k++;
 				if (camera->body->pos.y > target->pos.y || target->pos.y - camera->body->pos.y >= 0.49)
@@ -289,41 +302,19 @@ void		handle_t_camera_mouvement_by_key(t_camera *camera, t_keyboard *p_keyboard,
 		}
 		if (k == l)
 		{
-			t_mesh_resize(camera->body, create_t_vector3(0.0, 0.2, 0.0));
+			t_mesh_resize(camera->body, create_t_vector4(0.0, 0.2, 0.0));
 			camera->crounch = 0;
 			j = 0.0;
 		}
 		else
 			j = 0.2;
 	}
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_F]) == 1)
-	{
-		i = 0;
-		while(i < engine->physic_engine->mesh_list->size && camera->f_press == 0)
-		{
-			target = t_mesh_list_get(engine->physic_engine->mesh_list, i);
-			if (camera->body != target && target->bubble_radius + camera->body->bubble_radius >= calc_dist_vector3_to_vector3(camera->body->center, target->center) && ft_strcmp(target->name, "door") == 0)
-			{
-				target->door.move = 1;
-				door = target;
-			}
-			i++;
-		}
-		camera->f_press = 1;
-	}
+	if (y != 0.0f)
+		camera->body->force = create_t_vector4(save.x, y, save.z);
 	else
-		camera->f_press = 0;
-
-	if (get_key_state(p_keyboard, p_keyboard->key[SDL_SCANCODE_B]) == 1)
-	{
-		save_map(engine->physic_engine->mesh_list, 1);
-	}
-
-	if (door != NULL)
-		t_mesh_move_door(door);
-	camera->body->force = create_t_vector3(save.x, y, save.z);
+		camera->body->force = save;
 	move_camera(camera, camera->body->force, engine, j);
-	camera->body->force = mult_vector3_by_vector3(camera->body->force, create_t_vector3(0.0, 1.0, 0.0));
+	camera->body->force = mult_vector4_by_vector4(camera->body->force, create_t_vector4(0.0, 1.0, 0.0));
 }
 
 void		handle_t_camera_view_by_mouse(t_camera *cam, t_mouse *p_mouse) // calcul du mouvement de l'angle de la camera a la souris
@@ -410,8 +401,11 @@ void		clean_t_camera(t_camera *camera)
 	t_view_port_clear_buffers(camera->view_port);
 }
 
-void		link_t_camera_to_t_mesh(t_camera *camera, t_mesh *mesh, float new_kinetic)
+void		link_t_camera_to_t_mesh(t_engine *engine, int index, t_mesh *mesh, float new_kinetic)
 {
+	t_camera	*camera;
+
+	camera = t_camera_list_get(engine->visual_engine->camera_list, index);
 	if (camera->body != NULL)
 		camera->body->camera = NULL;
 	camera->body = mesh;

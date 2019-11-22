@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 12:07:36 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 12:07:40 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-static void calc_value(t_vector2 *error, t_vector2 *income,
+static void			calc_value(t_vector2 *error, t_vector2 *income,
 						t_vector2_int start, t_vector2_int end)
 {
 	error->x = end.x - start.x;
@@ -11,8 +23,8 @@ static void calc_value(t_vector2 *error, t_vector2 *income,
 	error->y = (error->y >= 0) ? error->y : -error->y;
 }
 
-static void	calc_line_x_major(t_vector2_int_list *result,
-				t_vector2 *error, t_vector2 *income, t_vector2_int start)
+static void			calc_line_x_major(t_vector2_int_list *result,
+					t_vector2 *error, t_vector2 *income, t_vector2_int start)
 {
 	int cumul;
 	int	j;
@@ -33,8 +45,8 @@ static void	calc_line_x_major(t_vector2_int_list *result,
 	}
 }
 
-static void	calc_line_y_major(t_vector2_int_list *result,
-				t_vector2 *error, t_vector2 *income, t_vector2_int start)
+static void			calc_line_y_major(t_vector2_int_list *result,
+					t_vector2 *error, t_vector2 *income, t_vector2_int start)
 {
 	int cumul;
 	int	j;
@@ -55,11 +67,11 @@ static void	calc_line_y_major(t_vector2_int_list *result,
 	}
 }
 
-t_vector2_int_list calc_line(t_vector2_int start, t_vector2_int end)
+t_vector2_int_list	calc_line(t_vector2_int start, t_vector2_int end)
 {
-	t_vector2_int_list result;
-	t_vector2 error;
-	t_vector2 income;
+	t_vector2_int_list	result;
+	t_vector2			error;
+	t_vector2			income;
 
 	calc_value(&error, &income, start, end);
 	result = create_t_vector2_int_list(start);
@@ -67,6 +79,5 @@ t_vector2_int_list calc_line(t_vector2_int start, t_vector2_int end)
 		calc_line_x_major(&result, &error, &income, start);
 	else
 		calc_line_y_major(&result, &error, &income, start);
-
 	return (result);
 }

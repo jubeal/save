@@ -5,8 +5,8 @@ void	draw_skybox(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	int			nb_clipped;
 	t_uv 		tmp_uv;
 	t_triangle	triangle;
-	t_vector3	points[3];
-	t_vector3	points_uv[3];
+	t_vector4	points[3];
+	t_vector4	points_uv[3];
 	float 		result;
 
 	if (mesh->is_visible == BOOL_FALSE)
@@ -16,25 +16,25 @@ void	draw_skybox(t_window *p_win, t_camera *p_cam, t_mesh *mesh)
 	{
 		t_face face = t_face_list_at(mesh->faces, i); // recuperation la face du volume a draw
 
-		points[0] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face.index_vertices[0]), mesh->pos);
-		points[1] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face.index_vertices[1]), mesh->pos);
-		points[2] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices, face.index_vertices[2]), mesh->pos);
+		points[0] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices, face.index_vertices[0]), mesh->pos);
+		points[1] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices, face.index_vertices[1]), mesh->pos);
+		points[2] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices, face.index_vertices[2]), mesh->pos);
 
 		if (mesh->texture != NULL)
 		{
-			points_uv[0] = t_vector3_list_at(mesh->uvs, face.index_uvs[0]);
-			points_uv[1] = t_vector3_list_at(mesh->uvs, face.index_uvs[1]);
-			points_uv[2] = t_vector3_list_at(mesh->uvs, face.index_uvs[2]);
+			points_uv[0] = t_vector4_list_at(mesh->uvs, face.index_uvs[0]);
+			points_uv[1] = t_vector4_list_at(mesh->uvs, face.index_uvs[1]);
+			points_uv[2] = t_vector4_list_at(mesh->uvs, face.index_uvs[2]);
 		}
 
 
-		result = dot_t_vector3(face.normale, normalize_t_vector3(substract_vector3_to_vector3(points[0], p_cam->pos)));
+		result = dot_t_vector4(face.normale, normalize_t_vector4(substract_vector4_to_vector4(points[0], p_cam->pos)));
 
 		if (result < 0)
 		{
-			points[0] = mult_vector3_by_matrix(points[0], (p_cam->view));
-			points[1] = mult_vector3_by_matrix(points[1], (p_cam->view));
-			points[2] = mult_vector3_by_matrix(points[2], (p_cam->view));
+			points[0] = mult_vector4_by_matrix(points[0], (p_cam->view));
+			points[1] = mult_vector4_by_matrix(points[1], (p_cam->view));
+			points[2] = mult_vector4_by_matrix(points[2], (p_cam->view));
 
 			if (mesh->texture != NULL)
 			 	nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);

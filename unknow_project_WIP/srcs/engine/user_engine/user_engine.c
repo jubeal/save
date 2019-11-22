@@ -37,13 +37,22 @@ void			free_t_user_engine(t_user_engine *dest)
 	// printf("free t_user_engine\n");
 }
 
-void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam)
+void			t_user_engine_handle_camera(t_engine *engine, t_camera *cam, t_window *p_win)
 {
 	t_mouse *mouse = engine->user_engine->mouse;
 	t_keyboard *keyboard = engine->user_engine->keyboard;
 	get_t_mouse_info(mouse); // recuperation des informations mouse (position, et boutton utiliser)
-	if (mouse->button[MOUSE_LEFT] == BOOL_TRUE)
+	// if (mouse->pos.x != WIN_X / 2 && mouse->pos.y != WIN_Y / 2)
 		handle_t_camera_view_by_mouse(cam, mouse); // calcul du mouvement de l'angle de la camera a la souris
+	// if (mouse->pos.x == 0 || mouse->pos.x == WIN_X - 1 || mouse->pos.y == 0 || mouse->pos.y == WIN_Y - 1)
+	// {
+		SDL_WarpMouseInWindow(p_win->window, WIN_X / 2, WIN_Y / 2);
+		// mouse->old_pos.x = WIN_X / 2;
+		// mouse->old_pos.y = WIN_Y / 2;
+		// print_t_vector2_int(mouse->rel_pos, "rel pos ");
+	// }
+	// else if (mouse->pos.x != WIN_X / 2 && mouse->pos.y != WIN_Y / 2)
+		// handle_t_camera_view_by_mouse(cam, mouse);
 
 	handle_t_camera_mouvement_by_key(cam, keyboard, engine); // deplacement cameras
 

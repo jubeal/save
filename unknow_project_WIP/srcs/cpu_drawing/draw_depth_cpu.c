@@ -4,9 +4,9 @@ void	draw_triangle_depth_cpu(t_view_port *view_port, t_triangle *p_triangle, flo
 {
 	t_color			color;
 	t_triangle		triangle;
-	t_vector3		min;
-	t_vector3		max;
-	t_vector3		current;
+	t_vector4		min;
+	t_vector4		max;
+	t_vector4		current;
 	t_rasterizer	ab;
 	t_rasterizer	ac;
 	t_rasterizer	bc;
@@ -18,9 +18,9 @@ void	draw_triangle_depth_cpu(t_view_port *view_port, t_triangle *p_triangle, flo
 
 	color.a = 1.0f;
 
-	triangle.a = convert_opengl_to_vector3(view_port, p_triangle->a);
-	triangle.b = convert_opengl_to_vector3(view_port, p_triangle->b);
-	triangle.c = convert_opengl_to_vector3(view_port, p_triangle->c);
+	triangle.a = convert_opengl_to_vector4(view_port, p_triangle->a);
+	triangle.b = convert_opengl_to_vector4(view_port, p_triangle->b);
+	triangle.c = convert_opengl_to_vector4(view_port, p_triangle->c);
 
 	triangle.a.z = 1.0 / triangle.a.z;
 	triangle.b.z = 1.0 / triangle.b.z;
@@ -32,7 +32,7 @@ void	draw_triangle_depth_cpu(t_view_port *view_port, t_triangle *p_triangle, flo
 
 	t_triangle_get_min_max_value(&triangle, &min, &max);
 
-	float area = edge_t_vector3(triangle.a, triangle.b, triangle.c);
+	float area = edge_t_vector4(triangle.a, triangle.b, triangle.c);
 
 	if (min.x < 0)
 		min.x = 0;

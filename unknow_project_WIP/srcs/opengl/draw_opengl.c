@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-// void draw_pixel_opengl(t_window *p_win, t_vector3 *p_coord, t_color *p_color)
+// void draw_pixel_opengl(t_window *p_win, t_vector4 *p_coord, t_color *p_color)
 // {
 // 	GLfloat vertex_buffer_data[] = {
 // 		p_coord->x, p_coord->y, 0.0f

@@ -54,7 +54,7 @@ t_matrix	*initialize_t_matrix(void)
 	return (result);
 }
 
-t_matrix	create_translation_matrix(t_vector3 translation)
+t_matrix	create_translation_matrix(t_vector4 translation)
 {
 	t_matrix	result;
 
@@ -65,7 +65,7 @@ t_matrix	create_translation_matrix(t_vector3 translation)
 	return (result);
 }
 
-t_matrix	create_scaling_matrix(t_vector3 scaling)
+t_matrix	create_scaling_matrix(t_vector4 scaling)
 {
 	t_matrix	result;
 
@@ -156,7 +156,7 @@ t_matrix	mult_matrix_by_matrix(t_matrix m1, t_matrix m2)
 	return (result);
 }
 
-t_vector3	mult_vector3_by_matrix(t_vector3 vertex, t_matrix m)
+t_vector4	mult_vector4_by_matrix(t_vector4 vertex, t_matrix m)
 {
 	float	result[3];
 
@@ -166,7 +166,7 @@ t_vector3	mult_vector3_by_matrix(t_vector3 vertex, t_matrix m)
 							+ m.value[2][1] * vertex.z + m.value[3][1];
 	result[2] = m.value[0][2] * vertex.x + m.value[1][2] * vertex.y \
 							+ m.value[2][2] * vertex.z + m.value[3][2];
-	return (create_t_vector3(result[0], result[1], result[2]));
+	return (create_t_vector4(result[0], result[1], result[2]));
 }
 
 void		print_t_matrix(t_matrix *m)
@@ -174,12 +174,12 @@ void		print_t_matrix(t_matrix *m)
 	int	i;
 
 	i = 0;
-	// printf("--------------------------------------------------------------\n");
+	printf("--------------------------------------------------------------\n");
 	while (i < 4)
 	{
-		// printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i],\
+		printf("|\t%-.2f|\t%-.2f|\t%-.2f|\t%-.2f|\n", m->value[0][i],\
 				m->value[1][i], m->value[2][i], m->value[3][i]);
 		i++;
 	}
-	// printf("--------------------------------------------------------------\n");
+	printf("--------------------------------------------------------------\n");
 }

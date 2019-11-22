@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_parsing.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 17:07:46 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 17:08:22 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 char		*ft_strcut(char **src, char delim)
@@ -51,24 +63,32 @@ int			ft_strcmp(char *s1, char *s2)
 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
 }
 
-char		*ft_strjoinf(char *s1, char *s2, int c)
+int			ft_get_end_line(char *str)
 {
-	char	*str;
+	size_t		i;
 
-	str = ft_strjoin(s1, s2);
-	if (c == 1 || c == 3)
-		free(s1);
-	if (c == 2 || c == 3)
-		free(s2);
-	return (str);
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+		i++;
+	return (i);
 }
 
-int			ft_strlength(char *s)
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int ret;
+	char	*section;
+	int		i;
 
-	ret = 0;
-	while (s[ret])
-		ret++;
-	return (ret);
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	if (!(section = (char*)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (len != 0)
+	{
+		section[i] = s[start + i];
+		i++;
+		len--;
+	}
+	section[i] = '\0';
+	return (section);
 }

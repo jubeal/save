@@ -1,23 +1,23 @@
 #include "unknow_project.h"
 
-int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 *p_points_uv)
+int			clip_triangle_to_plane(t_camera *p_camera, t_vector4 *p_points, t_vector4 *p_points_uv)
 {
-	t_vector3 		outside_points[3];
-	t_vector3 		inside_points[3];
-	t_vector3 		outside_points_uv[3];
-	t_vector3 		inside_points_uv[3];
-	t_vector3		forward;
-	t_vector3		plane_center;
-	t_vector3		*clipping_list;
-	t_vector3		*clipping_list_uv;
+	t_vector4 		outside_points[3];
+	t_vector4 		inside_points[3];
+	t_vector4 		outside_points_uv[3];
+	t_vector4 		inside_points_uv[3];
+	t_vector4		forward;
+	t_vector4		plane_center;
+	t_vector4		*clipping_list;
+	t_vector4		*clipping_list_uv;
 	int				outside_nb;
 	int				inside_nb;
 	float			dist[3];
 
 	clipping_list = p_camera->clipping_list;
 	clipping_list_uv = p_camera->clipping_list_uv;
-	forward = create_t_vector3(0, 0, 1);
-	plane_center = create_t_vector3(0, 0, p_camera->near);
+	forward = create_t_vector4(0, 0, 1);
+	plane_center = create_t_vector4(0, 0, p_camera->near);
 
 	dist[0] = calc_distance_to_plane(forward, plane_center, p_points[0]); //calcul de la distance du triangle par rapport au plan
 	dist[1] = calc_distance_to_plane(forward, plane_center, p_points[1]);
@@ -53,11 +53,11 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 
 		{
 			clipping_list_uv[0] = inside_points_uv[0];
 
-			clipping_list_uv[1] = interpolate_vector3_over_line(
+			clipping_list_uv[1] = interpolate_vector4_over_line(
 												interpolate_ratio(inside_points[0].x, outside_points[0].x, clipping_list[1].x),
 												interpolate_ratio(inside_points[0].y, outside_points[0].y, clipping_list[1].y),
 												inside_points_uv[0], outside_points_uv[0]);
-			clipping_list_uv[2] = interpolate_vector3_over_line(
+			clipping_list_uv[2] = interpolate_vector4_over_line(
 												interpolate_ratio(inside_points[0].x, outside_points[1].x, clipping_list[2].x),
 												interpolate_ratio(inside_points[0].y, outside_points[1].y, clipping_list[2].y),
 												inside_points_uv[0], outside_points_uv[1]);
@@ -75,7 +75,7 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 
 		{
 			clipping_list_uv[0] = inside_points_uv[0];
 			clipping_list_uv[1] = inside_points_uv[1];
-			clipping_list_uv[2] = interpolate_vector3_over_line(
+			clipping_list_uv[2] = interpolate_vector4_over_line(
 											interpolate_ratio(inside_points[0].x, outside_points[0].x, clipping_list[2].x),
 											interpolate_ratio(inside_points[0].y, outside_points[0].y, clipping_list[2].y),
 											inside_points_uv[0], outside_points_uv[0]);
@@ -89,11 +89,11 @@ int			clip_triangle_to_plane(t_camera *p_camera, t_vector3 *p_points, t_vector3 
 		if (p_points_uv != NULL)
 		{
 			clipping_list_uv[3] = inside_points_uv[1];
-			clipping_list_uv[4] = interpolate_vector3_over_line(
+			clipping_list_uv[4] = interpolate_vector4_over_line(
 											interpolate_ratio(inside_points[0].x, outside_points[0].x, clipping_list[4].x),
 											interpolate_ratio(inside_points[0].y, outside_points[0].y, clipping_list[4].y),
 											inside_points_uv[0], outside_points_uv[0]);
-			clipping_list_uv[5] = interpolate_vector3_over_line(
+			clipping_list_uv[5] = interpolate_vector4_over_line(
 											interpolate_ratio(inside_points[1].x, outside_points[0].x, clipping_list[5].x),
 											interpolate_ratio(inside_points[1].y, outside_points[0].y, clipping_list[5].y),
 											inside_points_uv[1], outside_points_uv[0]);

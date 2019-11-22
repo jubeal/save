@@ -6,10 +6,14 @@
 typedef struct  	s_item
 {
 	char			*name;
-	t_mesh			*mesh;
-	int				picked_up; // 0 no | 1 yes
 	int 			(*pf)(t_player*);
 }       			t_item;
+
+t_item			create_health_pack(void);
+t_item			create_ammo_pack(int type);
+t_item			create_armor_pack(void);
+t_item			create_jet_pack(void);
+t_item			create_color_card(int type);
 
 typedef struct	s_item_list
 {
@@ -28,5 +32,7 @@ void			clean_t_item_list(t_item_list *dest);
 t_item			t_item_list_at(t_item_list *dest, int index);
 t_item			*t_item_list_get(t_item_list *dest, int index);
 int				t_item_list_get_index(t_item_list *dest, t_item *mesh);
+
+t_item_list		*load_items(t_mesh_list *meshs);
 
 #endif

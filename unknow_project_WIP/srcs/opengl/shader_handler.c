@@ -16,8 +16,8 @@ static char	*read_shader(const char *p_path)
 		ft_stradd(&content, line);
 		free(line);
 	}
-	close(fd);
 	free(line);
+	close(fd);
 	return (content);
 }
 

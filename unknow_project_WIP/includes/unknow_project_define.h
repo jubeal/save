@@ -1,8 +1,8 @@
 #ifndef UNKNOW_PROJECT_DEFINE_H
 # define UNKNOW_PROJECT_DEFINE_H
 
-# define WIN_X 1840
-# define WIN_Y 1220
+# define WIN_X 1240
+# define WIN_Y 920
 
 # define NB_THREAD_MAX 100
 # define NB_TRIANGLE_MAX 15
@@ -14,7 +14,7 @@
 # define BUFF_SIZE 2500
 
 # define FPS 60000
-# define PUSH_SIZE 200000
+# define PUSH_SIZE 150
 
 # define MOUSE_BUTTON 3
 # define MOUSE_NULL -1

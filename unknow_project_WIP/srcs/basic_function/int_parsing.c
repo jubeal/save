@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   int_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 16:14:03 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 16:14:04 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
-int				ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	int			i;
 	long long	number;
@@ -24,7 +36,7 @@ int				ft_atoi(const char *str)
 	return (number * neg);
 }
 
-int				get_short(int a, int b, int c)
+int		get_short(int a, int b, int c)
 {
 	int			result;
 
@@ -36,7 +48,7 @@ int				get_short(int a, int b, int c)
 	return (result);
 }
 
-int				get_big(int a, int b, int c)
+int		get_big(int a, int b, int c)
 {
 	int			result;
 
@@ -48,14 +60,14 @@ int				get_big(int a, int b, int c)
 	return (result);
 }
 
-int			min(int a, int b)
+int		min(int a, int b)
 {
 	if (a <= b)
 		return (a);
 	return (b);
 }
 
-int			max(int a, int b)
+int		max(int a, int b)
 {
 	if (a >= b)
 		return (a);

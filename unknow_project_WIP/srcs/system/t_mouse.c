@@ -10,6 +10,8 @@ t_mouse	create_t_mouse(void)
 	result.button[MOUSE_LEFT] = BOOL_FALSE;
 	result.button[MOUSE_RIGHT] = BOOL_FALSE;
 	result.button[MOUSE_MIDDLE] = BOOL_FALSE;
+	result.clicked_left = BOOL_FALSE;
+	result.clicked_right = BOOL_FALSE;
 	return (result);
 }
 
@@ -31,8 +33,16 @@ void	get_t_mouse_info(t_mouse *mouse)
 	mouse->old_pos = mouse->pos;
 	mousestate = SDL_GetMouseState(&(mouse->pos.x), &(mouse->pos.y));
 	if (mouse->old_pos.x != -1)
-		mouse->rel_pos = create_t_vector2_int((mouse->pos.x - mouse->old_pos.x),
-											(mouse->pos.y - mouse->old_pos.y));
+		mouse->rel_pos = create_t_vector2_int((mouse->pos.x - WIN_X / 2),
+											(mouse->pos.y - WIN_Y / 2));
+	// else
+		// print_t_vector2_int(mouse->rel_pos, "rel pos ");
+
+	// else if (mouse->pos.x == WIN_X / 2 && mouse->pos.y == WIN_Y / 2)
+	// {
+	// 	mouse->old_pos.x = WIN_X / 2;
+	// 	mouse->old_pos.y = WIN_Y / 2;
+	// }
 	if (mousestate & SDL_BUTTON(SDL_BUTTON_LEFT))
 		mouse->button[MOUSE_LEFT] = BOOL_TRUE;
 	else
@@ -66,17 +76,17 @@ void	print_t_mouse(t_mouse *mouse) // affiche les infos de la souris --- a SUPPR
 
 	i = 0;
 	find = 0;
-	// printf("[ %d][ %d ] - [ %d ][ %d ]", mouse->pos.x, mouse->pos.y, mouse->rel_pos.x, mouse->rel_pos.y);
+	printf("[ %d][ %d ] - [ %d ][ %d ]", mouse->pos.x, mouse->pos.y, mouse->rel_pos.x, mouse->rel_pos.y);
 	while (i < MOUSE_BUTTON)
 	{
 		if (mouse->button[i] == BOOL_TRUE)
 		{
-			// printf("[%s]", button_text[i]);
+			printf("[%s]", button_text[i]);
 			find++;
 		}
 		i++;
 	}
 	if (find == 0)
 		printf("[NULL]");
-	// printf("\n");
+	printf("\n");
 }

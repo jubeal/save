@@ -12,8 +12,9 @@ t_surface *read_png_file(const char *filename)
 
 	if (!(surface = (t_surface *)malloc(sizeof(t_surface))))
 		error_exit(-29, "Can't malloc a t_surface");
-	// printf("malloc read_png_file\n");
-	fp = fopen (filename, "rb");		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
+
+	if ((fp = fopen (filename, "rb")) == NULL)
+		error_exit(-500, ft_strjoin(filename, " doesn't exist"));		//ouverture du fichier .png. "rb" = read byte donc lecture uniquement et en byte.
 
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);	//fonction lib png pour creer une sorte de curseur que l'on appelle tete de lecture
 	info_ptr = png_create_info_struct (png_ptr);	//lib png, cree une structure qui stock l'encodage de la couleur qu'il detecte
@@ -79,10 +80,7 @@ t_texture *png_load(char *path)
 
 	if (!(texture = (t_texture *)malloc(sizeof(t_texture))))	//malloc du t_texture
 		error_exit(-29, "Can't malloc a t_texture");			//sortie si probleme
-	// printf("malloc png_load\n");
-
 	texture->path = path;
-
 	texture->surface = read_png_file(path);					//lecture du fichier .png
 
 	tmp_surface = IMG_Load(path);							//chargement de l'image par SDL dans tmp_surface

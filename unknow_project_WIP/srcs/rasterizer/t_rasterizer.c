@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_rasterizer	create_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
+t_rasterizer	create_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 {
 	t_rasterizer	result;
 
@@ -11,7 +11,7 @@ t_rasterizer	create_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
 	return (result);
 }
 
-t_rasterizer	*initialize_t_rasterizer(t_vector3 a, t_vector3 b, t_vector3 c)
+t_rasterizer	*initialize_t_rasterizer(t_vector4 a, t_vector4 b, t_vector4 c)
 {
 	t_rasterizer	*result;
 

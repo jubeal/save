@@ -41,6 +41,7 @@ t_gui create_t_gui(float x, int y)
 	result.key_press = 0;
     result.perso.hp = x;
 	result.perso.mun = y;
+	result.info_print = 0;
 	return (result);
 }
 
@@ -94,7 +95,7 @@ void	print_letter(t_camera *main_camera, t_gui *gui, char *str, t_rectangle rec)
 		}
 		i++;
 	}
-	draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
+	// draw_buffer_opengl(main_camera->view_port->window, main_camera->view_port->window->color_data);
 }
 
 void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
@@ -109,8 +110,8 @@ void	print_info_bar(t_camera *main_camera, t_player *player, t_gui *gui)
 	free(str);
 
 	str = ft_itoa(player->current_weapon->ammo);
-	str = ft_strcat(str, " / ");
-	str = ft_strcat(str, ft_itoa(player->current_weapon->total_ammo));
+	str = ft_strjoinf(str, " / ", 1);
+	str = ft_strjoinf(str, ft_itoa(player->current_weapon->total_ammo), 3);
 
 	print_letter(main_camera, gui, str, create_t_rectangle(create_t_vector2(0.78, -0.90), create_t_vector2(0.01, 0.05)));
 	free(str);

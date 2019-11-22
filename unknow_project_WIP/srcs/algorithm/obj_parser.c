@@ -1,6 +1,6 @@
 #include "unknow_project.h"
 
-t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
+t_mesh		read_obj_file(char *path, t_vector4 pos, t_vector4 size, float gravity)
 {
 	t_mesh	result;
 	char	*line;
@@ -33,11 +33,11 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 			line_split = ft_strsplit(line, ' ');
 			if (ft_strcmp(line_split[0], "v") == 0)
 			{
-				t_mesh_add_point(&result, create_t_vector3(atof(line_split[1]) * size.x, atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
+				t_mesh_add_point(&result, create_t_vector4(atof(line_split[1]) * size.x, atof(line_split[2]) * size.y, atof(line_split[3]) * size.z));
 			}
 			else if (ft_strcmp(line_split[0], "vt") == 0)
 			{
-				t_mesh_add_uv(&result, create_t_vector3(atof(line_split[1]), atof(line_split[2]), 0.0));
+				t_mesh_add_uv(&result, create_t_vector4(atof(line_split[1]), atof(line_split[2]), 0.0));
 			}
 			else if (ft_strcmp(line_split[0], "f") == 0)
 			{
@@ -60,8 +60,9 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 					set_t_face_vertices(&tmp_face, index[0], index[2], index[3]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[2], index_uv[3]);
 					t_mesh_add_face(&result, tmp_face);
+					ft_freetab(tab);
 				}
-				if (ft_tablen(line_split) == 4)
+				else if (ft_tablen(line_split) == 4)
 				{
 					// Format : 2 - 1 - 3 - 4
 					i = 0;
@@ -76,8 +77,10 @@ t_mesh		read_obj_file(char *path, t_vector3 pos, t_vector3 size, float gravity)
 					set_t_face_vertices(&tmp_face, index[0], index[1], index[2]);
 					set_t_face_uvs(&tmp_face, index_uv[0], index_uv[1], index_uv[2]);
 					t_mesh_add_face(&result, tmp_face);
+					ft_freetab(tab);
 				}
 			}
+			ft_freetab(line_split);
 		}
 		free(line);
 	}

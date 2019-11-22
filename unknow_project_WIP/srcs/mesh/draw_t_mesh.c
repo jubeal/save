@@ -1,19 +1,19 @@
 #include "unknow_project.h"
 
-void		init_points_uv(t_mesh *mesh, t_face face, t_vector3 *points_uv)
+void		init_points_uv(t_mesh *mesh, t_face face, t_vector4 *points_uv)
 {
-	points_uv[0] = t_vector3_list_at(mesh->uvs, face.index_uvs[0]);
-	points_uv[1] = t_vector3_list_at(mesh->uvs, face.index_uvs[1]);
-	points_uv[2] = t_vector3_list_at(mesh->uvs, face.index_uvs[2]);
+	points_uv[0] = t_vector4_list_at(mesh->uvs, face.index_uvs[0]);
+	points_uv[1] = t_vector4_list_at(mesh->uvs, face.index_uvs[1]);
+	points_uv[2] = t_vector4_list_at(mesh->uvs, face.index_uvs[2]);
 }
 
-void		init_points(t_mesh *mesh, t_face face, t_vector3 *points)
+void		init_points(t_mesh *mesh, t_face face, t_vector4 *points)
 {
-	points[0] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices,\
+	points[0] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices,\
 									face.index_vertices[0]), mesh->pos);
-	points[1] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices,\
+	points[1] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices,\
 									face.index_vertices[1]), mesh->pos);
-	points[2] = add_vector3_to_vector3(t_vector3_list_at(mesh->vertices,\
+	points[2] = add_vector4_to_vector4(t_vector4_list_at(mesh->vertices,\
 									face.index_vertices[2]), mesh->pos);
 }
 
@@ -62,7 +62,7 @@ void		find_darkness(t_mesh *mesh, t_face face, t_camera *cam,\
 	float		darkness;
 	int			j;
 
-	darkness = (-dot_t_vector3(face.normale, cam->sun_direction) + 2)\
+	darkness = (-dot_t_vector4(face.normale, cam->sun_direction) + 2)\
 													/ (2 / (1 - 0.1));
 	if (darkness > 1)
 		darkness = 1;
@@ -86,21 +86,21 @@ void		find_darkness(t_mesh *mesh, t_face face, t_camera *cam,\
 
 void		how_many_points_clipped(t_mesh *mesh, t_face face, t_camera *p_cam)
 {
-	t_vector3	points[3];
-	t_vector3	points_uv[3];
+	t_vector4	points[3];
+	t_vector4	points_uv[3];
 	int			nb_clipped;
 	float		result;
 
 	init_points(mesh, face, &*points);
 	if (mesh->texture != NULL)
 		init_points_uv(mesh, face, &*points_uv);
-	result = dot_t_vector3(face.normale, normalize_t_vector3(\
-					substract_vector3_to_vector3(points[0], p_cam->pos)));
+	result = dot_t_vector4(face.normale, normalize_t_vector4(\
+					substract_vector4_to_vector4(points[0], p_cam->pos)));
 	if (result < 0)
 	{
-		points[0] = mult_vector3_by_matrix(points[0], (p_cam->view));
-		points[1] = mult_vector3_by_matrix(points[1], (p_cam->view));
-		points[2] = mult_vector3_by_matrix(points[2], (p_cam->view));
+		points[0] = mult_vector4_by_matrix(points[0], (p_cam->view));
+		points[1] = mult_vector4_by_matrix(points[1], (p_cam->view));
+		points[2] = mult_vector4_by_matrix(points[2], (p_cam->view));
 		if (mesh->texture != NULL)
 			nb_clipped = clip_triangle_to_plane(p_cam, points, points_uv);
 		else

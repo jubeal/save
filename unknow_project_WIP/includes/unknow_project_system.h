@@ -13,7 +13,8 @@ typedef struct	s_mouse
 	t_vector2_int
 				rel_pos;
 	int			button[MOUSE_BUTTON];
-	char		clicked;
+	char		clicked_left;
+	char		clicked_right;
 }				t_mouse;
 
 t_mouse		create_t_mouse();
@@ -26,6 +27,7 @@ typedef struct	s_keyboard
 {
 	int			key[232];
 	char		clicked;
+	int			i;
 	const Uint8	*state; //a ne pas free, ca appartient a sdl2
 						//	!!! DANGER SI FREE DU STATE !!!
 }				t_keyboard;

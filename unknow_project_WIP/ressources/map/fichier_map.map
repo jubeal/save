@@ -1,57 +1,97 @@
-/* mesh primitive or # + obj path / mesh name / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / collectible 1 ou 0 / hitbox off = * */
+/* mesh primitive or # + obj path / mesh name / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / hp 1 / visibility off = * */
 
-plane: plane 0.0 0.0 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0
-plane: plane 0.0 -1.0 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0
+/* pour le player:
+/* primitive / name / coord 3 / size 3 / texture 1 / gravity 1 / rotation 3 / color 4 / hp 1 / armor 1 / fuel 1 / ammo gun 2 / ammo ar 2 / ammo rifle 2 / ammo shotgun 2 / ammo rpg 2 /card (red/blue/green) 3
 
-cube: wall 0.5 0.0 5.0 4.5 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0
-cube: wall -5.0 0.0 5.0 4.5 2.0 0.1 NULL 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0
-cube: wall -5.0 0.0 -5.0 10.0 2.0 0.1 NULL 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 0 
-cube: wall -5.0 0.0 -0.5 4.5 2.0 0.1 NULL 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0 0
-cube: wall -5.0 0.0 5.0 4.5 2.0 0.1 NULL 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0 0
-cube: wall 5.0 0.0 5.0 10.0 2.0 0.1 NULL 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0 0
-cube: wall 5.0 0.0 5.0 10.0 2.0 0.1 NULL 0.0 0.0 45.0 0.0 1.0 1.0 1.0 1.0 0
+player: Player -12.0 0.0 2.0 0.3 0.5 0.3 NULL 0.0 0.0 0.0 0.0 1.0 0.4 1.0 1.0 20 0 100 15 15 30 120 0 10 0 20 0 5 0 0 0
 
-cube:    platform    4.0 0.0 5.0    2.0 1.0 1.0    NULL    0.0    0.0 90.0 0.0    1.0 0.0 0.0 1.0 0
-cube: platform 4.0 0.0 5.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 0.0 1.0 0.0 1.0 0
-cube: platform 7.0 1.0 6.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0 0
-cube: platform 11.0 0.5 6.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: platform 15.0 1.0 8.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 11.0 1.5 8.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 15.0 2.0 7.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 13.0 2.5 9.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 13.0 3.0 5.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 10.0 3.5 4.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 11.0 4.0 3.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 7.0 4.5 3.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 8.0 5.0 8.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 10.0 5.5 10.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 15.0 6.0 9.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 11.0 6.5 8.0 3.0 0.5 2.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: stair    12.0 7.0 7.0 3.0 0.5 2.0 NULL 0.0 30.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform -2.0 0.3 -2.0 1.0 0.5 1.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 30.0 0.3 30.0 1.0 0.5 1.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 14.5 0.0 14.5 1.0 0.5 1.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
-cube: platform 15.0 0.8 15.0 1.0 0.05 1.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
+plane: end 10.0 0.0 10.0 0.3 0.0 0.3 NULL 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0   -1
 
-cube: door -0.5 0.0 5.0 1.0 2.0 0.1 NULL 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0
-cube: door -5.0 0.0 0.5 1.0 2.0 0.1 NULL 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0 0
+plane: plane 0.0 0.0 0.0 100.0 0.0 100.0 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1
+plane: plane 0.0 -0.01 0.0 100.0 0.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0    -1 *
 
-cube: ladder 9.99 0.0 -10.0 1.0 10.0 0.01 NULL 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0 0
-cube: cube 10.0 0.0 -10.0 1.0 10.0 1.0 NULL 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0 0
+cube: wall 50.0 0.0 50.0 -100.0 100.0 100.0 NULL 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    -1 *
+cube: wall 50.0 0.0 -50.0 -100.0 100.0 100.0 NULL 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0    -1 *
+cube: wall -50.0 0.0 50.0 -100.0 100.0 100.0 NULL 0.0 0.0 -90.0 0.0 1.0 0.0 0.0 1.0    -1 *
+cube: wall -50.0 0.0 -50.0 100.0 100.0 -100.0 NULL 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0    -1 *
 
-cube: cube -9.0 2.0 7.0 0.2 6.0 2.0 NULL 0.0 90.0 0.0 0.0 0.5 0.0 1.0 1.0 0
-cube: cube -10.2 2.0 7.0 0.2 6.0 2.0 NULL 0.0 90.0 0.0 0.0 0.5 0.0 1.0 1.0 0
-cube: stair -10.0 0.0 8.0 1.0 0.1 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 8.5 1.0 0.2 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 9.0 1.0 0.3 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 9.5 1.0 0.4 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 10.0 1.0 0.5 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 10.5 1.0 0.6 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 11.0 1.0 0.7 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 11.5 1.0 0.8 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 12.0 1.0 0.9 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 12.5 1.0 1.0 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
-cube: stair -10.0 0.0 13.0 1.0 1.1 1.0 NULL 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0 0
+cube: wall 0.5 0.0 5.0 4.5 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall -5.0 0.0 5.0 4.5 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall -5.0 0.0 -5.0 4.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall 1.0 0.0 -5.0 4.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall -5.0 0.0 -0.5 4.5 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall -5.0 0.0 5.0 4.5 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall 5.0 0.0 5.0 10.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 1.0 1.0    200000
+cube: wall 5.0 0.0 5.0 10.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 45.0 0.0 1.0 1.0 1.0 1.0    200000
 
-cube: stair -10.0 0.0 5.0 10.0 0.05 1.0 NULL 0.0 10.0 90.0 0.0 1.0 0.0 1.0 1.0 0
+cube:    platform    4.0 0.0 5.0    2.0 1.0 1.0    ressources/assets/texture/cube_test.png    0.0    0.0 90.0 0.0    1.0 0.0 0.0 1.0    200000
+cube: platform 4.0 0.0 5.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 1.0 0.0 1.0    200000
+cube: platform 7.0 1.0 6.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0    200000
+cube: platform 11.0 0.5 6.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0    200000
+cube: platform 15.0 1.0 8.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 11.0 1.5 8.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 15.0 2.0 7.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 13.0 2.5 9.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 13.0 3.0 5.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 10.0 3.5 4.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 11.0 4.0 3.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 7.0 4.5 3.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 8.0 5.0 8.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 10.0 5.5 10.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 15.0 6.0 9.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 11.0 6.5 8.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
+cube: stair 12.0 7.0 7.0 3.0 0.5 2.0 ressources/assets/texture/cube_test.png 0.0 30.0 90.0 0.0 1.0 0.0 1.0 1.0    -1
+cube: platform -2.0 0.35 -2.0 1.0 0.5 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
+cube: platform 30.0 0.35 30.0 1.0 0.5 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
+cube: platform 14.5 0.0 14.5 1.0 0.5 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0    200000
+cube: platform 15.0 0.8 15.0 1.0 0.05 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0  200000
+
+cube: door -0.5 0.0 5.0 1.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 0.7 0.7 0.7 1.0    -1
+cube: door -5.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.7 0.7 0.7 1.0    -1
+cube: door_blue -10.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.2 0.2 1.0 1.0    -1
+cube: door_red -8.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.2 0.2 1.0    -1
+cube: door_green -12.0 0.0 0.5 1.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.2 1.0 0.2 1.0    -1
+
+cube: ladder 9.99 0.0 -10.0 1.0 10.0 0.01 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 1.0 1.0   -1
+cube: cube 10.0 0.0 -10.0 1.0 10.0 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 0.0 1.0 1.0   200000
+
+cube: cube -9.0 2.0 7.0 0.2 6.0 2.0 ressources/assets/texture/cube_test.png 0.0 90.0 0.0 0.0 0.5 0.0 1.0 1.0   -1
+cube: cube -10.2 2.0 7.0 0.2 6.0 2.0 ressources/assets/texture/cube_test.png 0.0 90.0 0.0 0.0 0.5 0.0 1.0 1.0   -1
+cube: stair -10.0 0.0 8.0 1.0 0.1 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 8.5 1.0 0.2 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 9.0 1.0 0.3 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 9.5 1.0 0.4 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 10.0 1.0 0.5 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 10.5 1.0 0.6 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 11.0 1.0 0.7 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 11.5 1.0 0.8 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 12.0 1.0 0.9 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 12.5 1.0 1.0 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+cube: stair -10.0 0.0 13.0 1.0 1.1 1.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 1.0 1.0 0.0 1.0   -1
+
+cube: wall -1.0 0.0 -5.0 2.0 2.0 0.1 ressources/assets/texture/cube_test.png 0.0 0.0 0.0 0.0 0.8 0.8 0.0 1.0    -1   #
+cube: stair -10.0 0.0 25.0 10.0 0.05 1.0 ressources/assets/texture/cube_test.png 0.0 10.0 90.0 0.0 1.0 0.0 1.0 1.0    -1
+
+cube: Enemy 1.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+/cube: Enemy 12.0 0.0 4.0 0.3 0.5 0.3 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+/cube: Enemy -15.0 0.0 -4.0 0.3 0.5 0.3 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+/cube: Enemy 1.0 0.0 14.0 0.3 0.5 0.3 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+/cube: Enemy 28.0 0.0 -8.0 0.3 0.5 0.3 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 0.0 0.0 1.0    50
+
+cube: elevator -10.0 -5.0 -10.0 5.0 5.0 5.0 ressources/assets/texture/cube_test.png 0.0 0.0 90.0 0.0 0.0 1.0 1.0 1.0   -1
+
+cube: destructible_wall   10.0 0.0 0.0    2.0 5.0 0.1 ressources/assets/texture/cube_test.png 0.0    0.0 0.0 0.0    1.0 0.5 0.5 1.0   200000
+item: Ammo_Pack_1 -7.0 0.0 0.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.3 0.3 0.3 1.0   -1
+item: Ammo_Pack_2 -7.0 0.0 1.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.8 0.0 1.0   -2
+item: Ammo_Pack_3 -7.0 0.0 2.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.0 1.0   -3
+item: Ammo_Pack_4 -7.0 0.0 -1.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.4 0.0 0.0 1.0   -4
+item: Ammo_Pack_5 -7.0 0.0 -2.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.4 0.0 0.4 1.0   -5
+item: Jet_Pack_1 -8.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_2 -7.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_3 -6.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Jet_Pack_4 -5.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.8 0.5 1.0   -1
+item: Armor_Pack_1 -11.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Armor_Pack_2 -12.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.0 0.0 0.8 1.0   -1
+item: Health_Pack_1 -9.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
+item: Health_Pack_2 -10.0 0.0 -6.0   0.2 0.05 0.2   ressources/assets/texture/cube_test.png   0.0   0.0 0.0 0.0   0.8 0.0 0.0 1.0   -1
 */

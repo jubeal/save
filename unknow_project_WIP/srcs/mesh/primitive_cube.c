@@ -1,35 +1,35 @@
 #include "unknow_project.h"
 
-static void	t_mesh_init_point_primitive_cube(t_mesh *result, t_vector3 size)
+static void	t_mesh_init_point_primitive_cube(t_mesh *result, t_vector4 size)
 {
 	size.x -= EPSILON;
 	size.y -= EPSILON;
 	size.z -= EPSILON;
-	t_mesh_add_point(result, create_t_vector3(0, 0, 0));
-	t_mesh_add_point(result, create_t_vector3(size.x, 0, 0));
-	t_mesh_add_point(result, create_t_vector3(size.x, 0, size.z));
-	t_mesh_add_point(result, create_t_vector3(0, 0, size.z));
-	t_mesh_add_point(result, create_t_vector3(0, size.y, 0));
-	t_mesh_add_point(result, create_t_vector3(size.x, size.y, 0));
-	t_mesh_add_point(result, create_t_vector3(size.x, size.y, size.z));
-	t_mesh_add_point(result, create_t_vector3(0, size.y, size.z));
+	t_mesh_add_point(result, create_t_vector4(0, 0, 0));
+	t_mesh_add_point(result, create_t_vector4(size.x, 0, 0));
+	t_mesh_add_point(result, create_t_vector4(size.x, 0, size.z));
+	t_mesh_add_point(result, create_t_vector4(0, 0, size.z));
+	t_mesh_add_point(result, create_t_vector4(0, size.y, 0));
+	t_mesh_add_point(result, create_t_vector4(size.x, size.y, 0));
+	t_mesh_add_point(result, create_t_vector4(size.x, size.y, size.z));
+	t_mesh_add_point(result, create_t_vector4(0, size.y, size.z));
 }
 
 static void	t_mesh_init_uv_point_primitive_cube(t_mesh *result)
 {
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 1.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 1.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 1.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 1.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 2.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 2.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 2.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 2.0f / 3.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f / 3.0f, 1.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(2.0f / 3.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f / 3.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(2.0f / 3.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 1.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f / 3.0f, 1.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(2.0f / 3.0f, 1.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 1.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 2.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f / 3.0f, 2.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(2.0f / 3.0f, 2.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 2.0f / 3.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f / 3.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(2.0f / 3.0f, 1.0f, 0.0f));
 }
 
 static void	t_mesh_init_face_primitive_cube_next(t_mesh *result, t_face tmp_face1, t_face tmp_face2)
@@ -76,7 +76,7 @@ static void	t_mesh_init_face_primitive_cube(t_mesh *result, t_face tmp_face1, t_
 	t_mesh_add_face(result, tmp_face2);
 }
 
-t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, char *texture_path, float gravity)
+t_mesh		create_primitive_cube(t_vector4 pos, t_vector4 size, char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
@@ -84,7 +84,7 @@ t_mesh		create_primitive_cube(t_vector3 pos, t_vector3 size, char *texture_path,
 
 	result = create_t_mesh(pos);
 	result.primitive = 1;
-	result.size = create_t_vector3(size.x, size.y, size.z);
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	t_mesh_activate_gravity(&result, gravity);
 	t_mesh_init_point_primitive_cube(&result, size);
 	t_mesh_init_uv_point_primitive_cube(&result);

@@ -1,0 +1,76 @@
+Doom Nukem project
+
+
+- Déplacements : ok
+
+- fermeture programme : ok
+
+- Textures : perspective correct manquante
+
+- Visée : ok
+
+- Formes quelconques obj : ok
+
+- Hauteur sol plafond réglable inclinaisons : ok
+
+- sky box : ok (mise a part texture évidemment)
+
+- Transparency murs : ok
+
+- Élements de décors : non mais pas dur
+
+- Sprites : WIP
+
+- Reglage de la luminosité : non
+
+- Textes : ok
+
+- HUD : ok
+
+- Interactions obstacles : marches ok mur WIP
+
+- Courir sauter tomber : ok
+
+- Nager/Voler : ok
+
+- Interactions environnement : ok
+
+- Bloquer le passage en fonction de la taille objets : ok
+
+- Ramassage objets : ok
+
+- Actions suite a interactions (ex jetpack, porte a clef) : ok
+
+- Actions modifies elements du jeu : ok
+
+- Animations, ouvertures de porte,  passage secret… : ok
+
+- Personnages et objets interactions : WIP
+
+- Projectiles interactions decors ennemie… : WIP
+
+- Histoire : non
+
+- Début - fin de level : oui
+
+- Bruitages : oui mais a tester
+
+- Musique : oui
+
+- Editeur de niveau : non
+
+Bonus :
+
+- Menu avec choix : ok
+
+- Esthétique ambiance et decors soigné : pas prévu
+
+- Immersion : on verra
+
+- Scenario et histoire recherché : depuis quand je suis payé
+
+- Jeu en réseau : tu m’as pris pour Ubisoft ?
+
+- Multithread : ok
+
+- Plein de trucs meme pas imaginé ? : on a fais un moteur 3D, ca te suffit pas ?

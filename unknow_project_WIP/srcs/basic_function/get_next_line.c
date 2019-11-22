@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:03:52 by gboutin           #+#    #+#             */
-/*   Updated: 2019/10/09 14:18:38 by adjouber         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:00:45 by adjouber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int			process(char **final, t_list_fd **current, int test)
 	car_read = BUFF_SIZE;
 	if (!(buff = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
-	// printf("malloc process (GNL)\n");
 	while (car_read == BUFF_SIZE && test)
 	{
 		if ((car_read = read((*current)->fd, buff, BUFF_SIZE)) == -1)
@@ -94,7 +93,6 @@ static t_list_fd	*pick_up_good_one(int fd, t_list_fd **current)
 	{
 		if (!(*current = (t_list_fd *)malloc(sizeof(t_list_fd))))
 			return (NULL);
-		// printf("malloc pick_up_good_one (GNL)\n");
 		(*current)->rest = NULL;
 		(*current)->fd = fd;
 		(*current)->next = NULL;
@@ -119,7 +117,6 @@ int					get_next_line(const int fd, char **line)
 	{
 		if (!(final = (char *)malloc(sizeof(char))))
 			return (-1);
-		// printf("malloc GNL\n");
 		final[0] = '\0';
 	}
 	else if (!fill_with_rest(&final, &current) && (*line = final))

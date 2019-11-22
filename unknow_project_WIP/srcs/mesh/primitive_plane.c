@@ -2,13 +2,13 @@
 
 void		t_mesh_init_uv_point_primitive_plane(t_mesh *result)
 {
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 1.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 1.0f, 0.0f));
 }
 
-t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, char *texture_path, float gravity)
+t_mesh		create_primitive_plane(t_vector4 pos, t_vector4 size, char *texture_path, float gravity)
 {
 	t_mesh	result;
 	t_face	tmp_face1;
@@ -16,12 +16,12 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, char *texture_path
 
 	result = create_t_mesh(pos);
 	result.primitive = 0;
-	result.size = create_t_vector3(size.x, size.y, size.z);
+	result.size = create_t_vector4(size.x, size.y, size.z);
 	t_mesh_activate_gravity(&result, gravity);
-	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, -size.z / 2.0));
-	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, -size.z / 2.0));
-	t_mesh_add_point(&result, create_t_vector3(size.x / 2.0, 0.0, size.z / 2.0));
-	t_mesh_add_point(&result, create_t_vector3(-size.x / 2.0, 0.0, size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector4(-size.x / 2.0, 0.0, -size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector4(size.x / 2.0, 0.0, -size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector4(size.x / 2.0, 0.0, size.z / 2.0));
+	t_mesh_add_point(&result, create_t_vector4(-size.x / 2.0, 0.0, size.z / 2.0));
 	t_mesh_init_uv_point_primitive_plane(&result);
 	tmp_face1 = create_t_face();
 	tmp_face2 = create_t_face();
@@ -40,8 +40,8 @@ t_mesh		create_primitive_plane(t_vector3 pos, t_vector3 size, char *texture_path
 
 void		t_mesh_init_uv_point_primitive_vertical_plane(t_mesh *result)
 {
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 0.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(0.0f, 1.0f, 0.0f));
-	t_mesh_add_uv(result, create_t_vector3(1.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 0.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(0.0f, 1.0f, 0.0f));
+	t_mesh_add_uv(result, create_t_vector4(1.0f, 1.0f, 0.0f));
 }

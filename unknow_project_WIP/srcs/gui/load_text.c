@@ -20,16 +20,15 @@ void    load_letter(t_gui *gui, char *str, int idx)
 
 void    load_menu(t_gui *gui)
 {
-    gui->menu[0] = png_load("ressources/assets/texture/Tittle_screenFULL.png");
-    gui->menu[1] = png_load("ressources/assets/texture/option_screen.png");
-    gui->menu[2] = png_load("ressources/assets/texture/setting_screen.png");
-    gui->menu[3] = png_load("ressources/assets/texture/sens_screen.png");
-    gui->menu[4] = png_load("ressources/assets/texture/difficulte_screen.png");
-    gui->menu[7] = png_load("ressources/assets/texture/impact_balle.png");
-    gui->menu[8] = png_load("ressources/assets/texture/tete1.png");
-    gui->menu[9] = png_load("ressources/assets/texture/tete2.png");
-    gui->menu[10] = png_load("ressources/assets/texture/tete3.png");
-    gui->menu[11] = png_load("ressources/assets/texture/tete4.png");
+    gui->menu[0] = png_load("ressources/assets/imgs/Title_screen.png");
+    gui->menu[1] = png_load("ressources/assets/imgs/settings_screen.png");
+    gui->menu[2] = png_load("ressources/assets/imgs/controls_screen.png");
+    gui->menu[3] = png_load("ressources/assets/imgs/credits_screen.png");
+    gui->menu[4] = png_load("ressources/assets/imgs/pause_menu.png");
+    gui->menu[5] = png_load("ressources/assets/imgs/settings_pause_menu.png");
+    gui->menu[8] = png_load("ressources/assets/imgs/trainee.png");
+    gui->menu[9] = png_load("ressources/assets/imgs/recruit.png");
+    gui->menu[10] = png_load("ressources/assets/imgs/pirate.png");
     gui->menu[12] = png_load("ressources/assets/texture/balle.png");
     gui->menu[13] = png_load("ressources/assets/texture/tdm2.png");
     gui->menu[14] = png_load("ressources/assets/texture/press_key.png");

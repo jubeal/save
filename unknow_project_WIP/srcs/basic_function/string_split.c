@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_split.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 16:17:47 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 16:17:47 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 static char		*ft_strncpy_end(char *dst, char const *src, size_t len)
@@ -82,12 +94,10 @@ char			**ft_strsplit(char const *s, char c)
 	nb_word = ft_count_word(s, c);
 	if (!(array = (char**)malloc(sizeof(char*) * (nb_word + 1))))
 		return (NULL);
-	// printf("1er malloc strsplit\n");
 	while (i < nb_word)
 	{
 		if (!(array[i] = (char*)malloc(sizeof(char*) * (ft_let(s, c) + 1))))
 			return (NULL);
-		// printf("2eme malloc strsplit\n");
 		ft_strncpy_end(array[i], s, ft_let(s, c));
 		s += ft_let(s, c);
 		while (ft_is_sep(*s, c))

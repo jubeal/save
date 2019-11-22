@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_print.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjouber <adjouber@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 16:17:13 by adjouber          #+#    #+#             */
+/*   Updated: 2019/10/31 16:17:14 by adjouber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "unknow_project.h"
 
 void	ft_putchar(char c)
@@ -38,7 +50,7 @@ void	ft_putnbr(int n)
 		ft_putchar(n + '0');
 }
 
-void	endl()
+void	endl(void)
 {
-	// printf("\n");
+	ft_putstr("\n");
 }

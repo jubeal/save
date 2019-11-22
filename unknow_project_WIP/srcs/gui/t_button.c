@@ -4,14 +4,24 @@ int                 t_mouse_state(t_mouse *mouse)
 {
     if (get_mouse_state(mouse, MOUSE_LEFT) == BOOL_TRUE)
     {
-        mouse->clicked = BOOL_TRUE;
+        mouse->clicked_left = BOOL_TRUE;
         return (1);
     }
-    else if (get_mouse_state(mouse, MOUSE_LEFT) == BOOL_FALSE && mouse->clicked == BOOL_TRUE)
+    else if (get_mouse_state(mouse, MOUSE_LEFT) == BOOL_FALSE && mouse->clicked_left == BOOL_TRUE)
     {
-        mouse->clicked = BOOL_FALSE;
+        mouse->clicked_left = BOOL_FALSE;
         return (2);
     }
+	else if (get_mouse_state(mouse, MOUSE_RIGHT) == BOOL_TRUE)
+	{
+		mouse->clicked_right = BOOL_TRUE;
+		return (-1);
+	}
+	else if (get_mouse_state(mouse, MOUSE_RIGHT) == BOOL_FALSE && mouse->clicked_right == BOOL_TRUE)
+	{
+		mouse->clicked_right = BOOL_FALSE;
+		return (-2);
+	}
     else
     {
         return (0);

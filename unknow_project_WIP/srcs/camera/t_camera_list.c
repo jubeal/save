@@ -59,7 +59,7 @@ void			t_camera_list_add_back(t_camera_list *dest, t_camera *to_add)
 		tmp = dest->camera;
 		if (!(dest->camera = (t_camera *)malloc(sizeof(t_camera) * (dest->size + 1 + PUSH_SIZE))))
 			error_exit(-20, "Can't realloc a t_camera array");
-		// printf("malloc t_camera_list_add_back\n");
+		printf("malloc t_camera_list_add_back\n");
 		i = 0;
 		while (i < dest->size)
 		{

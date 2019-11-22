@@ -54,5 +54,5 @@ t_vector2	add_vector2_to_vector2(t_vector2 v1, t_vector2 v2)
 
 void		print_t_vector2(t_vector2 vector, char *str) // A SUPPRIMER
 {
-	// printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
+	printf("%s%0.20f / %0.20f\n", str, vector.x, vector.y);
 }

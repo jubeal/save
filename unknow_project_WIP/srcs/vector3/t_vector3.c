@@ -118,5 +118,5 @@ float		t_vector3_length(t_vector3 a)
 
 void		print_t_vector3(t_vector3 vector, char *str) // A SUPPRIMER
 {
-	// printf("%s : %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
+	printf("%s : %0.4f / %0.4f / %0.4f\n", str, vector.x, vector.y, vector.z);
 }

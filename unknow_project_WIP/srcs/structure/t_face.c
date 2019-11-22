@@ -5,7 +5,7 @@ t_face	create_t_face(void)
 	t_face	result;
 	int		i;
 
-	result.normale = create_t_vector3(0, 0, 0);
+	result.normale = create_t_vector4(0, 0, 0);
 	i = -1;
 	while (++i < 3)
 	{
@@ -22,7 +22,7 @@ t_face	*initialize_t_face(void)
 
 	if (!(result = (t_face *)malloc(sizeof(t_face))))
 		error_exit(-13, "Can't create a t_face");
-	// printf("malloc t_face\n");
+	printf("malloc t_face\n");
 	*result = create_t_face();
 	return (result);
 }
